@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stem Cells Quiz</title>
+<h2>Listening Activity</h2>
+
+<!-- Embedded audio object -->
+<audio id="audioObj" controls>
+    <source src="Stem Cells.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+</audio>
+
+<hr>
+
+
+<style>
+body{
+    font-family: Arial, sans-serif;
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 20px;
+    background: #f4f6f9;
+}
+
+h1{
+    color:#2c3e50;
+}
+
+.question{
+    background:white;
+    padding:15px;
+    margin-bottom:15px;
+    border-radius:8px;
+    box-shadow:0 1px 4px rgba(0,0,0,0.1);
+}
+
+button{
+    background:#0078d4;
+    color:white;
+    border:none;
+    padding:10px 20px;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+#result{
+    margin-top:20px;
+    font-size:1.2em;
+    font-weight:bold;
+}
+</style>
+</head>
+
+<body>
+
+<h1>Stem Cells Quiz</h1>
+<p>Choose the best answer for each question.</p>
+
+<form id="quizForm">
+
+<div class="question">
+<p>1. What are stem cells?</p>
+<label><input type="radio" name="q1" value="a"> Fully developed muscle cells</label><br>
+<label><input type="radio" name="q1" value="b"> Special cells that can copy themselves and change into other cell types</label><br>
+<label><input type="radio" name="q1" value="c"> Blood cells only</label>
+</div>
+
+<div class="question">
+<p>2. As stem cells develop, they become:</p>
+<label><input type="radio" name="q2" value="a"> Larger only</label><br>
+<label><input type="radio" name="q2" value="b"> More specialized</label><br>
+<label><input type="radio" name="q2" value="c"> Less useful</label>
+</div>
+
+<div class="question">
+<p>3. In an embryo, stem cells are found inside a:</p>
+<label><input type="radio" name="q3" value="a"> Bone marrow</label><br>
+<label><input type="radio" name="q3" value="b"> Blastocyst</label><br>
+<label><input type="radio" name="q3" value="c"> Muscle</label>
+</div>
+
+<div class="question">
+<p>4. Which is NOT a source of stem cells at birth?</p>
+<label><input type="radio" name="q4" value="a"> Umbilical cord blood</label><br>
+<label><input type="radio" name="q4" value="b"> Placental tissue</label><br>
+<label><input type="radio" name="q4" value="c"> Liver</label>
+</div>
+
+<div class="question">
+<p>5. Adult stem cells can be found in:</p>
+<label><input type="radio" name="q5" value="a"> Bone marrow</label><br>
+<label><input type="radio" name="q5" value="b"> Skin</label><br>
+<label><input type="radio" name="q5" value="c"> Both A and B</label>
+</div>
+
+<div class="question">
+<p>6. What is the main role of adult stem cells?</p>
+<label><input type="radio" name="q6" value="a"> Repair and replace damaged cells</label><br>
+<label><input type="radio" name="q6" value="b"> Carry oxygen</label><br>
+<label><input type="radio" name="q6" value="c"> Digest food</label>
+</div>
+
+<div class="question">
+<p>7. Totipotent stem cells can form:</p>
+<label><input type="radio" name="q7" value="a"> Only blood cells</label><br>
+<label><input type="radio" name="q7" value="b"> A complete organism</label><br>
+<label><input type="radio" name="q7" value="c"> Only muscle tissue</label>
+</div>
+
+<div class="question">
+<p>8. Pluripotent stem cells can become:</p>
+<label><input type="radio" name="q8" value="a"> Almost any cell type</label><br>
+<label><input type="radio" name="q8" value="b"> One cell type only</label><br>
+<label><input type="radio" name="q8" value="c"> Blood cells only</label>
+</div>
+
+<div class="question">
+<p>9. Multipotent stem cells can become:</p>
+<label><input type="radio" name="q9" value="a"> Any cell in the body</label><br>
+<label><input type="radio" name="q9" value="b"> Several related cell types</label><br>
+<label><input type="radio" name="q9" value="c"> Only skin cells</label>
+</div>
+
+<div class="question">
+<p>10. Unipotent stem cells can produce:</p>
+<label><input type="radio" name="q10" value="a"> One type of cell</label><br>
+<label><input type="radio" name="q10" value="b"> All body cells</label><br>
+<label><input type="radio" name="q10" value="c"> Several unrelated cell types</label>
+</div>
+
+<div class="question">
+<p>11. Which of the following is a specialized cell?</p>
+<label><input type="radio" name="q11" value="a"> Pluripotent stem cell</label><br>
+<label><input type="radio" name="q11" value="b"> Nerve cell</label><br>
+<label><input type="radio" name="q11" value="c"> Totipotent stem cell</label>
+</div>
+
+<div class="question">
+<p>12. Scientists can reprogram adult cells into:</p>
+<label><input type="radio" name="q12" value="a"> Blood stem cells</label><br>
+<label><input type="radio" name="q12" value="b"> Induced pluripotent stem cells (iPSCs)</label><br>
+<label><input type="radio" name="q12" value="c"> Liver tissue</label>
+</div>
+
+<button type="button" onclick="gradeQuiz()">Submit Quiz</button>
+
+</form>
+
+<div id="result"></div>
+
+<script>
+function gradeQuiz(){
+
+    const answers = {
+        q1:'b',
+        q2:'b',
+        q3:'b',
+        q4:'c',
+        q5:'c',
+        q6:'a',
+        q7:'b',
+        q8:'a',
+        q9:'b',
+        q10:'a',
+        q11:'b',
+        q12:'b'
+    };
+
+    let score = 0;
+
+    for(let question in answers){
+        let selected = document.querySelector(`input[name="${question}"]:checked`);
+        if(selected && selected.value === answers[question]){
+            score++;
+        }
+    }
+
+    document.getElementById("result").innerHTML =
+        `Score: ${score} / 12 (${Math.round(score/12*100)}%)`;
+}
+</script>
+
+</body>
+</html>
