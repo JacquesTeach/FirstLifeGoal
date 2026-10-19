@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stem Cells - An Advanced View</title>
+<h2>Listening Activity</h2>
+
+<!-- Embedded audio object -->
+<audio id="audioObj" controls>
+    <source src="Stem Cells.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+</audio>
+
+<hr>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7f6;
+            color: #333;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        .question-block {
+            margin-bottom: 30px;
+            padding: 20px;
+            border-left: 4px solid #3498db;
+            background: #fafafa;
+            border-radius: 0 4px 4px 0;
+        }
+        .question-text {
+            font-weight: 600;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+        .options {
+            list-style: none;
+            padding: 0;
+        }
+        .option-item {
+            margin-bottom: 10px;
+        }
+        .option-label {
+            display: block;
+            padding: 12px;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .option-label:hover {
+            background: #e8f4fd;
+            border-color: #3498db;
+        }
+        input[type="radio"] {
+            margin-right: 10px;
+        }
+        .feedback {
+            margin-top: 15px;
+            padding: 12px;
+            border-radius: 4px;
+            display: none;
+            font-weight: 500;
+        }
+        .correct-feedback {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .incorrect-feedback {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .btn-submit {
+            background: #3498db;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1em;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.2s;
+            margin-top: 10px;
+        }
+        .btn-submit:hover {
+            background: #2980b9;
+        }
+        .hint {
+            font-style: italic;
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Stem Cells: Potency, Differentiation, and Reprogramming</h1>
+        <p>Select your answers below and click "Check Answer" for instant feedback.</p>
+        
+        <form id="quizForm">
+            <!-- Question 1 -->
+            <div class="question-block" id="q1">
+                <div class="question-text">1. Which two fundamental properties define a true stem cell?</div>
+                <div class="hint">Hint: Think about what makes a stem cell dual-purposed: it must maintain its own reservoir in the body while also being able to generate functionally mature progeny.</div>
+                <ul class="options">
+                    <li class="option-item">
+                        <label class="option-label"><input type="radio" name="q1" value="incorrect1"> Rapid mitotic rate and high telomerase activity</label>
+                    </li>
+                    <li class="option-item">
+                        <label class="option-label"><input type="radio" name="q1" value="correct"> Capacity for self-renewal and ability to differentiate into specialized cell types</label>
+                    </li>
+                    <li class="option-item">
+                        <label class="option-label"><input type="radio" name="q1" value="incorrect2"> Unrestricted developmental potency and programmed cell death resistance</label>
+                    </li>
+                    <li class="option-item">
+                        <label class="option-label"><input type="radio" name="q1" value="incorrect3"> Obligate asymmetric division and absence of surface markers</label>
+                    </li>
+                </ul>
+                <button type="button" class="btn-submit" onclick="checkQuestion('q1')">Check Answer</button>
+                <div class="feedback correct-feedback" id="q1-correct">Correct! Stem cells are defined by their unique ability to undergo self-renewal (making identical copies of themselves) and to differentiate into various functional, specialized cell types.</div>
+                <div class="feedback incorrect-feedback" id="q1-incorrect">Incorrect. Please check the hint and try again!</div>
+            </div>
+
+            <!-- Question 2 -->
+            <div class="question-block" id="q2">
+                <div class="question-text">2. At what developmental stage are mammalian cells considered strictly totipotent, capable of forming both embryonic and extraembryonic tissues?</div>
+                <div class="hint">Hint: This potency level represents the absolute maximum developmental versatility, allowing the creation of a complete organism plus its survival structures in the womb.</div>
+                <ul class="options">
+                    <li class="option-item">
+                        <label class="option-label"><input type="radio" name="q2" value="incorrect1"> The blastocyst inner cell mass</label>
+                    </li>
+                    <li class="option-item">
+                        <label class="option-label"><input type="radio" name="q2" value="incorrect2"> The unfertilized secondary oocyte</label>
+                    </li>
+                    <li class="option-item">
+                        <label class="option-label"><input type="radio" name="q2" value="incorrect3"> The epiblast prior to gastrulation</label>
+                    </li>
+                    <li class="option-item">
+                        <label class="option-label"><input type="radio" name="q2" value="correct"> The zygote and early cleavage-stage blastomeres (up to the 4-8 cell stage)</label>
+                    </li>
+                </ul>
+                <button type="button" class="btn-submit" onclick="checkQuestion('q2')">Check Answer</button>
+                <div class="feedback correct-feedback" id="q2-correct">Correct! Totipotency represents the highest level of developmental potential, and only the zygote and very early blastomeres possess the ability to form both the entire embryo and the supporting extraembryonic tissues (like the placenta).</div>
+                <div class="feedback incorrect-feedback" id="q2-incorrect">Incorrect. Please check the hint and try again!</div>
+            </div>
+
+            <!-- Question 3 -->
+            <div class="question-block" id="q3">
+                <div class="question-text">3. Embryonic stem cells (ESCs) derived from the inner cell mass of a blastocyst are classified as:</div>
+                <div class="hint">Hint: Compare these cells to the zygote; remember that while they can build almost any tissue in the body, they cannot build the placenta.</div>
+                <ul class="options">
+                    <li class="option-item">
+                        <label class="option-label"><input type="radio" name="q3" value="correct"> Pluripotent, because they can give rise to cells derived from all three embryonic germ layers, but not extraembryonic membranes</label>
+                    </li>
+                    <li class="option-item">
+                        <label class="option-label"><input type="radio" name="q3" value="incorrect1"> Totipotent, because they can form every tissue in the adult body plus the placenta</label>
+                    </li>
+                    <li class="option-item">
+                        <label class="option-label"><input type="radio" name="q3" value="incorrect2"> Multipotent, because they are restricted to blood and immune lineages</label>
+                    </li>
+                    <li class="option-item">
+                        <label class="option-label"><input type="radio" name="q3" value="incorrect3"> Unipotent, because they can only divide symmetrically into identical blastomeres</label>
+                    </li>
+                </ul>
+                <button type="button" class="btn-submit" onclick="checkQuestion('q3')">Check Answer</button>
+                <div class="feedback correct-feedback" id="q3-correct">Correct! Pluripotent stem cells can differentiate into derivatives of the ectoderm, mesoderm, and endoderm, but they cannot independently form a whole functional organism because they lack extraembryonic potency.</div>
+                <div class="feedback incorrect-feedback" id="q3-incorrect">Incorrect. Please check the hint and try again!</div>
+            </div>
+
+            <!-- Question 4 -->
+            <div class="question-block" id="q4">
+                <div class="question-text">4. Hematopoietic stem cells (HSCs) found in the bone marrow are a classic example of which level of potency?</div>
+                <div class="hint">Hint: Consider how adult bone marrow cells can produce red blood cells, white blood cells, and platelets, but not skin or neurons.</div>
+                <ul class="options">
+                    <li class="option-item">
+                        <label class="option-label"><input type="radio" name="q4" value="incorrect1"> Totipotent</label>
+                    </li>
+                    <li class="option-item">
+                        <label class="option-label"><input type="radio" name="q4" value="incorrect2"> Pluripotent</label>
+                    </li>
+                    <li class="option-item">
+                        <label class="option-label"><input type="radio" name="q4" value="correct"> Multipotent, as they can differentiate into a restricted family of blood and immune cell lineages</label>
+                    </li>
+                    <li class="option-item">
+                        <label class="option-label"><input type="radio" name="q4" value="incorrect3"> Unipotent, as they can only generate erythrocytes</label>
+                    </li>
+                </ul>
+                <button type="button" class="btn-submit" onclick="checkQuestion('q4')">Check Answer</button>
+                <div class="feedback correct-feedback" id="q4-correct">Correct! Multipotent stem cells have a more limited repertoire, giving rise to multiple specialized cell types within a specific lineage or tissue system, such as myeloid and lymphoid blood cells.</div>
+                <div class="feedback incorrect-feedback" id="q4-incorrect">Incorrect. Please check the hint and try again!</div>
+            </div>
+
+            <!-- Question 5 -->
+            <div class="question-block" id="q5">
+                <div class="question-text">5. During gastrulation, the single-layered blastula is reorganized into a trilaminar structure consisting of the ectoderm, mesoderm, and endoderm. Which of the following derivative pairings is correct?</div>
+                <div class="hint">Hint: Recall which layer covers the outside of the body and forms the brain (ecto-), versus the layer that lines the internal tube of the digestive tract (endo-).</div>
+                <ul class="options">
+                    <li class="option-item">
+                        <label class="option-label"><input type="radio" name="q5" value="incorrect1"> Mesoderm gives rise to the central nervous system and epidermis</label>
+                    </li>
+                    <li class="option-item">
+                        <label class="option-label"><input type="radio" name="q5" value="correct"> Ectoderm gives rise to the epidermis and nervous system; endoderm gives rise to the epithelial lining of the gut and respiratory tract</label>
+                    </li>
+                    <li class="option-item">
+                        <label class="option-label"><input type="radio" name="q5" value="incorrect2"> Endoderm gives rise to skeletal muscle and the cardiovascular system</label>
+                    </li>
+                    <li class="option-item">
+                        <label class="option-label"><input type="radio" name="q5" value="incorrect3"> Ectoderm gives rise to the liver, pancreas, and gastrointestinal tract lining</label>
+                    </li>
+                </ul>
+                <button type="button" class="btn-submit" onclick="checkQuestion('q5')">Check Answer</button>
+                <div class="feedback correct-feedback" id="q5-correct">Correct! The ectoderm forms external and neural structures, the mesoderm forms muscle, bone, and circulatory systems, and the endoderm forms internal visceral linings like the gut and lungs.</div>
+                <div class="feedback incorrect-feedback" id="q5-incorrect">Incorrect. Please check the hint and try again!</div>
+            </div>
+
+            <!-- Question 6 -->
+            <div class="question-block" id="q6">
+                <div class="question-text">6. How does asymmetric cell division allow a stem cell population to maintain tissue homeostasis?</div>
+                <div class="hint">Hint: Think about the quantitative balance: one cell stays in the stem compartment, and the other leaves it to become functional tissue.</div>
+                <ul class="options">
+                    <li class="option-item">
+                        <label class="option-label"><input type="radio" name="q6" value="incorrect1"> By producing two identical stem cells that rapidly undergo apoptosis</label>
+                    </li>
+                    <li class="option-item">
+                        <label class="option-label"><input type="radio" name="q6" value="incorrect2"> By ensuring that both daughter cells simultaneously lose their potency and differentiate</label>
+                    </li>
+                    <li class="option-item">
+                        <label class="option-label"><input type="radio" name="q6" value="incorrect3"> By dividing without DNA replication to reduce metabolic stress</label>
+                    </li>
+                    <li class="option-item">
+                        <label class="option-label"><input type="radio" name="q6" value="correct"> By generating one daughter cell that remains a stem cell (self-renewal) and one that commits to a differentiated pathway</label>
+                    </li>
+                </ul>
+                <button type="button" class="btn-submit" onclick="checkQuestion('q6')">Check Answer</button>
+                <div class="feedback correct-feedback" id="q6-correct">Correct! Asymmetric division yields two distinct fates: one daughter cell preserves the stem cell identity, while the other begins specialized differentiation to replace lost or damaged cells.</div>
+                <div class="feedback incorrect-feedback" id="q6-incorrect">Incorrect. Please check the hint and try again!</div>
+            </div>
+
+            <!-- Question 7 -->
+            <div class="question-block" id="q7">
+                <div class="question-text">7. Although all somatic cells in an organism contain essentially the same genomic DNA, different cell types express vastly different proteins. What primary molecular mechanism drives this specialization from stem cells?</div>
+                <div class="hint">Hint: Consider how the book of life (DNA) remains the same in every cell, but cells use bookmarks and locks (epigenetics) to read only specific chapters.</div>
+                <ul class="options">
+                    <li class="option-item">
+                        <label class="option-label"><input type="radio" name="q7" value="correct"> Differential gene expression regulated by transcription factors and epigenetic modifications</label>
+                    </li>
+                    <li class="option-item">
+                        <label class="option-label"><input type="radio" name="q7" value="incorrect1"> Permanent deletion of non-essential genes during early cleavage</label>
+                    </li>
+                    <li class="option-item">
+                        <label class="option-label"><input type="radio" name="q7" value="incorrect2"> Random somatic hypermutation of the genome in each cell lineage</label>
+                    </li>
+                    <li class="option-item">
+                        <label class="option-label"><input type="radio" name="q7" value="incorrect3"> Amplification of ribosomal RNA genes in pluripotent cells</label>
+                    </li>
+                </ul>
+                <button type="button" class="btn-submit" onclick="checkQuestion('q7')">Check Answer</button>
+                <div class="feedback correct-feedback" id="q7-correct">Correct! Cell specialization is controlled by selectively activating or silencing specific sets of genes through DNA methylation, histone modification, and cell-specific transcription factors without altering the underlying DNA sequence.</div>
+                <div class="feedback incorrect-feedback" id="q7-incorrect">Incorrect. Please check the hint and try again!</div>
+            </div>
+
+            <!-- Question 8 -->
+            <div class="question-block" id="q8">
+                <div class="question-text">8. Morphogens are signaling molecules that direct stem cell differentiation in a concentration-dependent manner. A classic example of a morphogen gradient establishing positional identity in development is:</div>
+                <div class="hint">Hint: Think of a famous signaling protein named after a fast video game character that patterns digits on vertebrate limbs and the neural tube.</div>
+                <ul class="options">
+                    <li class="option-item">
+                        <label class="option-label"><input type="radio" name="q8" value="incorrect1"> Insulin-like growth factor 1 (IGF-1)</label>
+                    </li>
+                    <li class="option-item">
+                        <label class="option-label"><input type="radio" name="q8" value="incorrect2"> Hemoglobin</label>
+                    </li>
+                    <li class="option-item">
+                        <label class="option-label"><input type="radio" name="q8" value="correct"> Sonic Hedgehog (Shh)</label>
+                    </li>
+                    <li class="option-item">
+                        <label class="option-label"><input type="radio" name="q8" value="incorrect3"> ATP synthase</label>
+                    </li>
+                </ul>
+                <button type="button" class="btn-submit" onclick="checkQuestion('q8')">Check Answer</button>
+                <div class="feedback correct-feedback" id="q8-correct">Correct! Sonic Hedgehog acts as a morphogen forming spatial concentration gradients that pattern neural tube development, limb polarity, and various other organogenesis processes.</div>
+                <div class="feedback incorrect-feedback" id="q8-incorrect">Incorrect. Please check the hint and try again!</div>
+            </div>
+
+            <!-- Question 9 -->
+            <div class="question-block" id="q9">
+                <div class="question-text">9. Induced pluripotent stem cells (iPSCs) are generated from adult somatic cells (such as fibroblasts) by the introduction of the Yamanaka factors. Which set of transcription factors comprises the core Yamanaka cocktail?</div>
+                <div class="hint">Hint: This quartet of transcription factors includes two key master regulators of pluripotency (Oct4 and Sox2) alongside an oncogene (c-Myc) and a growth factor regulator (Klf4).</div>
+                <ul class="options">
+                    <li class="option-item">
+                        <label class="option-label"><input type="radio" name="q9" value="incorrect1"> p53, Rb, BRCA1, and EGFR</label>
+                    </li>
+                    <li class="option-item">
+                        <label class="option-label"><input type="radio" name="q9" value="correct"> Oct4, Sox2, Klf4, and c-Myc</label>
+                    </li>
+                    <li class="option-item">
+                        <label class="option-label"><input type="radio" name="q9" value="incorrect2"> MyoD, Pax6, Nanog, and GATA4</label>
+                    </li>
+                    <li class="option-item">
+                        <label class="option-label"><input type="radio" name="q9" value="incorrect3"> HoxA1, HoxB2, Wnt, and Notch</label>
+                    </li>
+                </ul>
+                <button type="button" class="btn-submit" onclick="checkQuestion('q9')">Check Answer</button>
+                <div class="feedback correct-feedback" id="q9-correct">Correct! Shinya Yamanaka demonstrated that introducing these four transcription factors into differentiated somatic cells can reprogram them back into an embryonic-like pluripotent state.</div>
+                <div class="feedback incorrect-feedback" id="q9-incorrect">Incorrect. Please check the hint and try again!</div>
+            </div>
+
+            <!-- Question 10 -->
+            <div class="question-block" id="q10">
+                <div class="question-text">10. A researcher isolates a multipotent stem cell from adult adipose tissue. If cultured under specific cytokine conditions, which limitation will this cell inherently possess compared to an embryonic stem cell?</div>
+                <div class="hint">Hint: Revisit the distinction between multipotency and pluripotency regarding how broad of a lineage spectrum a stem cell can access.</div>
+                <ul class="options">
+                    <li class="option-item">
+                        <label class="option-label"><input type="radio" name="q10" value="incorrect1"> It cannot undergo mitosis or self-renew in culture</label>
+                    </li>
+                    <li class="option-item">
+                        <label class="option-label"><input type="radio" name="q10" value="incorrect2"> It will automatically revert to a totipotent zygotic state without exogenous factors</label>
+                    </li>
+                    <li class="option-item">
+                        <label class="option-label"><input type="radio" name="q10" value="incorrect3"> It lacks epigenetic modifications and cannot express genes</label>
+                    </li>
+                    <li class="option-item">
+                        <label class="option-label"><input type="radio" name="q10" value="correct"> It is restricted to differentiating into lineages appropriate for its tissue of origin or closely related mesenchymal derivatives, lacking true pluripotency</label>
+                    </li>
+                </ul>
+                <button type="button" class="btn-submit" onclick="checkQuestion('q10')">Check Answer</button>
+                <div class="feedback correct-feedback" id="q10-correct">Correct! Because it is a multipotent adult stem cell, it cannot generate cells belonging to all three germ layers (e.g., it cannot form neural or endodermal gut tissues) the way a pluripotent embryonic stem cell can.</div>
+                <div class="feedback incorrect-feedback" id="q10-incorrect">Incorrect. Please check the hint and try again!</div>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        function checkQuestion(qId) {
+            const form = document.getElementById('quizForm');
+            const selected = form.elements[qId].value;
+            
+            const correctDiv = document.getElementById(qId + '-correct');
+            const incorrectDiv = document.getElementById(qId + '-incorrect');
+            
+            // Reset visibility
+            correctDiv.style.display = 'none';
+            incorrectDiv.style.display = 'none';
+            
+            if (!selected) {
+                alert('Please select an option first!');
+                return;
+            }
+            
+            if (selected === 'correct') {
+                correctDiv.style.display = 'block';
+            } else {
+                incorrectDiv.style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>
