@@ -1,0 +1,67 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Telemedicine Quiz</title>
+<style>
+body{font-family:Arial,sans-serif;background:#f4f7fb;margin:0;padding:20px}
+.container{max-width:1000px;margin:auto;background:white;padding:20px;border-radius:12px}
+h1{text-align:center}
+#progressWrap{width:100%;background:#ddd;border-radius:20px;overflow:hidden;margin:10px 0}
+#progressBar{height:20px;width:0%;background:#4caf50}
+#timer{text-align:right;font-weight:bold;color:#c0392b}
+.question{margin:15px 0;padding:12px;border:1px solid #ddd;border-radius:8px}
+label{display:block;padding:4px}
+.correct{background:#d4edda}
+.incorrect{background:#f8d7da}
+button{padding:12px 20px;border:none;background:#3498db;color:white;border-radius:6px;cursor:pointer}
+#result{font-size:22px;font-weight:bold;margin-top:20px;text-align:center}
+@media(max-width:600px){body{padding:10px}}
+</style>
+</head><body><div class="container">
+<h1>Telemedicine Quiz</h1>
+<!-- Embedded audio object -->
+<audio id="audioObj" controls>
+    <source src="Telemedicine.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+</audio>
+<div id="timer">Time: 15:00</div>
+<div id="progressWrap"><div id="progressBar"></div></div>
+<form id="quiz"></form>
+<button onclick="gradeQuiz();return false;">Submit Quiz</button>
+<button onclick="location.reload();return false;">Retry</button>
+<div id="result"></div>
+</div>
+<script>
+const questions=[
+['What is telemedicine?',['Medical care provided from a distance','A type of medicine','Hospital construction','Health insurance'],'Medical care provided from a distance'],
+['Which technology is commonly used in telemedicine?',['Video conferencing','Steam engines','Typewriters','Fax only'],'Video conferencing'],
+['Telemedicine helps people in:',['Remote areas','Only cities','Only hospitals','Only schools'],'Remote areas'],
+['Early telemedicine often used:',['Telephones','Smartphones','Drones','Satellites'],'Telephones'],
+['A milestone occurred in the:',['1960s','1700s','1800s','1400s'],'1960s'],
+['Who experimented with remote monitoring?',['Space agencies and hospitals','Banks','Airlines','Factories'],'Space agencies and hospitals'],
+['What expanded telemedicine in the 1990s?',['The internet','Coal power','Railroads','Telegraphs'],'The internet'],
+['COVID-19 increased use of:',['Telemedicine','Paper maps','Postal medicine','Radio dramas'],'Telemedicine'],
+['A common telemedicine service is:',['Virtual doctor consultations','Car repair','Online shopping','Banking'],'Virtual doctor consultations'],
+['Telemedicine can provide:',['Mental health counseling','Road maintenance','Flight training','Sports refereeing'],'Mental health counseling'],
+['Telemedicine helps monitor:',['Chronic diseases','Mountain ranges','Weather','Traffic lights'],'Chronic diseases'],
+['What can be issued electronically?',['Prescriptions','Buildings','Passports','Roads'],'Prescriptions'],
+['Telemedicine reduces:',['Travel time','Medical knowledge','Internet use','Population'],'Travel time'],
+['A criticism is that virtual visits may be less effective than:',['Face-to-face examinations','Reading books','Watching TV','Emails'],'Face-to-face examinations'],
+['A major concern involves:',['Patient privacy','Fashion trends','Movie reviews','Tourism'],'Patient privacy'],
+['Another concern is:',['Data security','Gardening','Architecture','Cooking'],'Data security'],
+['Some people lack access to reliable:',['Internet services','Libraries','Television','Airports'],'Internet services'],
+['Telemedicine is generally considered a:',['Complement to traditional care','Replacement for all doctors','Entertainment tool','Business model only'],'Complement to traditional care'],
+['Telemedicine can improve:',['Access to care','Traffic flow','Real estate prices','Sports results'],'Access to care'],
+['Overall consensus supports telemedicine because it expands access and:',['Improves efficiency','Eliminates hospitals','Removes doctors','Ends illness'],'Improves efficiency']
+];
+function shuffle(a){for(let i=a.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+const form=document.getElementById('quiz');
+questions.forEach((q,idx)=>{let opts=q[1].map(o=>({t:o,c:o===q[2]}));shuffle(opts);let div=document.createElement('div');div.className='question';let html='<p><b>'+(idx+1)+'. '+q[0]+'</b></p>';
+opts.forEach((o,i)=>{let L=['A','B','C','D'][i];html+=`<label><input type="radio" name="q${idx}" value="${o.c}"> ${L}. ${o.t}</label>`});div.innerHTML=html;form.appendChild(div);});
+form.addEventListener('change',()=>{let answered=document.querySelectorAll('input[type=radio]:checked').length;document.getElementById('progressBar').style.width=(answered/questions.length*100)+'%';});
+let time=900;const t=setInterval(()=>{let m=Math.floor(time/60),s=time%60;document.getElementById('timer').textContent=`Time: ${m}:${String(s).padStart(2,'0')}`;time--;if(time<0){clearInterval(t);gradeQuiz();}},1000);
+function gradeQuiz(){clearInterval(t);let score=0;questions.forEach((q,idx)=>{let selected=document.querySelector(`input[name=q${idx}]:checked`);if(selected){if(selected.value==='true'){score++;selected.parentElement.classList.add('correct');}else{selected.parentElement.classList.add('incorrect');document.querySelectorAll(`input[name=q${idx}]`).forEach(x=>{if(x.value==='true')x.parentElement.classList.add('correct');});}}});document.getElementById('result').innerHTML=`Score: ${score}/20 (${Math.round(score*100/20)}%)`;}
+</script></body></html>
