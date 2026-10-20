@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sugar in the Modern Diet Quiz</title>
+<h1>(Listening Exercise)</h1>
+
+<!-- Embedded audio object -->
+<audio id="audioObj" controls>
+    <source src="SugarInFocus.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+</audio>
+<style>
+#progressContainer{
+    width:100%;
+    height:25px;
+    background:#ddd;
+    border-radius:20px;
+    overflow:hidden;
+    margin-bottom:10px;
+}
+
+#progressBar{
+    width:0%;
+    height:100%;
+    background:#28a745;
+    transition:width 0.3s ease;
+}
+
+#progressText{
+    text-align:center;
+    font-weight:bold;
+    margin-bottom:20px;
+}
+``
+body{
+    font-family: Arial, sans-serif;
+    max-width: 1000px;
+    margin: auto;
+    padding: 20px;
+    background:#f5f6fa;
+}
+
+h1{
+    text-align:center;
+}
+
+
+<p id="progressText">0 of 20 questions answered</p>
+.question{
+    background:white;
+    border:1px solid #ddd;
+    border-radius:8px;
+    padding:15px;
+    margin:15px 0;
+}
+
+label{
+    display:block;
+    margin:6px 0;
+}
+
+button{
+    padding:12px 24px;
+    font-size:16px;
+    cursor:pointer;
+}
+
+#result{
+    margin-top:20px;
+    font-size:24px;
+    font-weight:bold;
+}
+
+.correct{
+    background:#d4edda;
+}
+
+.incorrect{
+    background:#f8d7da;
+}
+</style>
+
+</head>
+<body>
+
+<h2>Sugar in the Modern Diet: Health Consequences</h2>
+
+<div id="quiz"></div>
+
+<button onclick="gradeQuiz()">Submit Quiz</button>
+
+<div id="result"></div>
+
+<script>
+
+const questions = [
+
+{
+question: "Why has sugar consumption become a public health concern?",
+choices: [
+"It is linked to several chronic diseases",
+"It has become increasingly expensive",
+"It is no longer used in processed foods",
+"It provides insufficient energy"
+],
+answer: 0
+},
+
+{
+question: "According to the WHO, free sugars should make up less than what percentage of daily energy intake?",
+choices: [
+"5%",
+"10%",
+"20%",
+"25%"
+],
+answer: 1
+},
+
+{
+question: "What additional target does the WHO suggest for greater health benefits?",
+choices: [
+"Below 5%",
+"Below 15%",
+"Below 20%",
+"Below 25%"
+],
+answer: 0
+},
+
+{
+question: "Which disease is strongly associated with excessive sugar consumption?",
+choices: [
+"Type 2 diabetes",
+"Tuberculosis",
+"Malaria",
+"Pneumonia"
+],
+answer: 0
+},
+
+{
+question: "Which condition is related to high sugar intake?",
+choices: [
+"Heart disease",
+"Appendicitis",
+"Broken bones",
+"Food allergies"
+],
+answer: 0
+},
+
+{
+question: "Which dental problem is commonly linked to excessive sugar consumption?",
+choices: [
+"Dental decay",
+"Gum discoloration",
+"Jaw fractures",
+"Wisdom teeth growth"
+],
+answer: 0
+},
+
+{
+question: "What trend helped increase sugar consumption worldwide?",
+choices: [
+"Greater availability of processed foods",
+"Reduced food production",
+"Declining urbanization",
+"Decreased beverage choices"
+],
+answer: 0
+},
+
+{
+question: "Approximately how many adults worldwide were overweight in 2024?",
+choices: [
+"940 million",
+"2.6 billion",
+"400 million",
+"170 million"
+],
+answer: 1
+},
+
+{
+question: "What percentage of adults were overweight in 2024?",
+choices: [
+"25%",
+"35%",
+"45%",
+"55%"
+],
+answer: 2
+},
+
+{
+question: "Approximately how many adults were living with obesity in 2024?",
+choices: [
+"170 million",
+"400 million",
+"940 million",
+"2.6 billion"
+],
+answer: 2
+},
+
+{
+question: "Why is obesity considered a serious public health issue?",
+choices: [
+"It increases the risk of chronic diseases",
+"It only affects older adults",
+"It is unrelated to diet",
+"It rarely affects health"
+],
+answer: 0
+},
+
+{
+question: "Who bears the economic costs associated with obesity and diabetes treatment?",
+choices: [
+"Governments, insurers, and individuals",
+"Food manufacturers only",
+"Hospitals only",
+"Patients only"
+],
+answer: 0
+},
+
+{
+question: "What additional economic effect results from sugar-related illnesses?",
+choices: [
+"Lost productivity",
+"Increased tourism",
+"Higher crop yields",
+"Lower insurance spending"
+],
+answer: 0
+},
+
+{
+question: "A modeling study associated sugar-sweetened beverages with approximately how many deaths?",
+choices: [
+"18,000",
+"1,800",
+"180,000",
+"800,000"
+],
+answer: 0
+},
+
+{
+question: "The same study linked sugary beverages to approximately how many disease events?",
+choices: [
+"700,000",
+"2 million",
+"7 million",
+"70 million"
+],
+answer: 2
+},
+
+{
+question: "What was the estimated direct medical cost reported in the study?",
+choices: [
+"200 million USD",
+"500 million USD",
+"1 billion USD",
+"2 billion USD"
+],
+answer: 3
+},
+
+{
+question: "What kind of research involved more than 100,000 participants in France?",
+choices: [
+"A cohort study",
+"A laboratory experiment",
+"A hospital trial",
+"A census survey"
+],
+answer: 0
+},
+
+{
+question: "What did the French study find regarding sugary drinks?",
+choices: [
+"They may increase cancer risk",
+"They prevent obesity",
+"They eliminate health risks",
+"They improve heart health"
+],
+answer: 0
+},
+
+{
+question: "Which social trend reflects growing concern about sugar consumption?",
+choices: [
+"Sugar taxes",
+"Reduced food labeling",
+"Elimination of nutrition standards",
+"Removal of ingredient lists"
+],
+answer: 0
+},
+
+{
+question: "Which statement best reflects the essay's conclusion?",
+choices: [
+"Reducing excessive sugar intake can improve public health",
+"Sugar should be completely banned",
+"Health outcomes are unrelated to diet",
+"Sugar consumption has no long-term effects"
+],
+answer: 0
+}
+
+];
+
+const quizContainer = document.getElementById("quiz");
+
+questions.forEach(function(q, index){
+
+    let html = "";
+
+    html += "<div class='question'>";
+    html += "<h3>" + (index + 1) + ". " + q.question + "</h3>";
+
+    q.choices.forEach(function(choice, choiceIndex){
+
+        html += "<label>";
+        html += "<input type='radio' name='q" + index + "' value='" + choiceIndex + "'>";
+        html += " " + choice;
+        html += "</label>";
+
+    });
+
+    html += "</div>";
+
+    quizContainer.innerHTML += html;
+
+});
+function updateProgress(){
+
+    let answered = 0;
+
+    questions.forEach(function(q, index){
+
+        const selected =
+            document.querySelector("input[name='q" + index + "']:checked");
+
+        if(selected){
+            answered++;
+        }
+
+    });
+
+    const percentage =
+        (answered / questions.length) * 100;
+
+    document.getElementById("progressBar").style.width =
+        percentage + "%";
+
+    document.getElementById("progressText").innerHTML =
+        answered + " of " + questions.length +
+        " questions answered";
+
+}
+function gradeQuiz(){
+
+    let score = 0;
+
+    questions.forEach(function(q, index){
+
+        const selected =
+            document.querySelector("input[name='q" + index + "']:checked");
+
+        if(selected){
+
+            const answer = parseInt(selected.value);
+
+            const questionDiv =
+                document.getElementsByClassName("question")[index];
+
+            if(answer === q.answer){
+                score++;
+                questionDiv.classList.add("correct");
+            }
+            else{
+                questionDiv.classList.add("incorrect");
+            }
+        }
+
+    });
+
+    document.getElementById("result").innerHTML =
+        "Score: " + score + " / " + questions.length;
+
+}
+
+</script>
+
+</body>
+</html>
+
