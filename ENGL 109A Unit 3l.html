@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 3 Vocabulary Drag & Drop Quiz</title>
+
+<style>
+body{
+    font-family:Arial, sans-serif;
+    max-width:1200px;
+    margin:20px auto;
+    padding:20px;
+    background:#f4f6f9;
+}
+
+h1{
+    color:#2c3e50;
+}
+
+.word-bank{
+    background:white;
+    padding:15px;
+    border-radius:8px;
+    margin-bottom:25px;
+    box-shadow:0 1px 5px rgba(0,0,0,.1);
+}
+
+.word{
+    display:inline-block;
+    background:#0078d4;
+    color:white;
+    padding:8px 12px;
+    margin:5px;
+    border-radius:6px;
+    cursor:grab;
+}
+
+.question{
+    background:white;
+    padding:15px;
+    margin-bottom:12px;
+    border-radius:8px;
+    box-shadow:0 1px 4px rgba(0,0,0,.1);
+}
+
+.dropzone{
+    display:inline-block;
+    min-width:180px;
+    min-height:32px;
+    border-bottom:2px solid #333;
+    padding:4px;
+    vertical-align:middle;
+}
+
+.correct{
+    background:#d4edda;
+}
+
+.incorrect{
+    background:#f8d7da;
+}
+
+.feedback{
+    margin-top:8px;
+    font-size:0.9em;
+}
+
+button{
+    background:#0078d4;
+    color:white;
+    border:none;
+    border-radius:5px;
+    padding:10px 20px;
+    margin-right:10px;
+    cursor:pointer;
+}
+
+#result{
+    margin-top:20px;
+    font-size:1.2em;
+    font-weight:bold;
+}
+</style>
+</head>
+
+<body>
+
+<h1>Unit 3 Vocabulary: Drag-and-Drop Quiz</h1>
+
+<div class="word-bank" id="wordBank">
+
+<div class="word" draggable="true">as opposed to</div>
+<div class="word" draggable="true">struggle</div>
+<div class="word" draggable="true">put together</div>
+<div class="word" draggable="true">first-hand</div>
+<div class="word" draggable="true">resource</div>
+<div class="word" draggable="true">quit</div>
+<div class="word" draggable="true">permanent</div>
+<div class="word" draggable="true">found</div>
+<div class="word" draggable="true">exhausted</div>
+<div class="word" draggable="true">cope</div>
+<div class="word" draggable="true">research</div>
+<div class="word" draggable="true">informed</div>
+<div class="word" draggable="true">eventually</div>
+<div class="word" draggable="true">unemployed</div>
+<div class="word" draggable="true">influence</div>
+<div class="word" draggable="true">support oneself</div>
+<div class="word" draggable="true">wages</div>
+<div class="word" draggable="true">turn upside down</div>
+
+</div>
+
+<div class="question" id="box1">
+1. After working a 12-hour shift at the hospital, the medical team was completely
+<span class="dropzone" data-answer="exhausted"></span>.
+<div class="feedback"></div>
+</div>
+
+<div class="question" id="box2">
+2. It can be difficult to
+<span class="dropzone" data-answer="cope"></span>
+with stress when managing multiple major deadlines at once.
+<div class="feedback"></div>
+</div>
+
+<div class="question" id="box3">
+3. She decided to
+<span class="dropzone" data-answer="quit"></span>
+her corporate job to pursue her dream.
+<div class="feedback"></div>
+</div>
+
+<div class="question" id="box4">
+4. I prefer face-to-face meetings,
+<span class="dropzone" data-answer="as opposed to"></span>
+sending long chains of emails.
+<div class="feedback"></div>
+</div>
+
+<div class="question" id="box5">
+5. After several months of interviews, he
+<span class="dropzone" data-answer="eventually"></span>
+received a job offer.
+<div class="feedback"></div>
+</div>
+
+<!-- Continue Q6-Q18 using same pattern -->
+
+<button onclick="gradeQuiz()">Submit Quiz</button>
+<button onclick="resetQuiz()">Try Again</button>
+
+<div id="result"></div>
+
+<script>
+
+const definitions = {
+
+"exhausted":"Extremely tired or worn out.",
+"cope":"To deal successfully with a difficult situation.",
+"quit":"To leave a job, school, or activity permanently.",
+"as opposed to":"Used to show contrast between two choices.",
+"eventually":"In the end after some time.",
+"research":"Careful study to discover information.",
+"found":"To establish or start an organization.",
+"influence":"The power to affect people or situations.",
+"permanent":"Lasting indefinitely.",
+"resource":"A useful supply or tool.",
+"first-hand":"From direct personal experience.",
+"informed":"Knowledgeable about a subject.",
+"put together":"To assemble or organize.",
+"struggle":"To make strong efforts despite difficulties.",
+"turn upside down":"To cause major disruption.",
+"support oneself":"To earn enough for your own expenses.",
+"unemployed":"Without a paid job.",
+"wages":"Regular pay from an employer."
+
+};
+
+let draggedItem = null;
+
+function initializeDragDrop(){
+
+document.querySelectorAll('.word').forEach(word=>{
+
+word.addEventListener('dragstart',function(){
+draggedItem=this;
+});
+
+});
+
+document.querySelectorAll('.dropzone').forEach(zone=>{
+
+zone.addEventListener('dragover',e=>{
+e.preventDefault();
+});
+
+zone.addEventListener('drop',e=>{
+e.preventDefault();
+
+if(zone.firstChild){
+document.getElementById('wordBank')
+.appendChild(zone.firstChild);
+}
+
+zone.appendChild(draggedItem);
+
+});
+
+});
+
+}
+
+initializeDragDrop();
+
+function gradeQuiz(){
+
+let score = 0;
+let total = document.querySelectorAll('.dropzone').length;
+
+document.querySelectorAll('.question').forEach(question=>{
+
+const zone = question.querySelector('.dropzone');
+const feedback = question.querySelector('.feedback');
+
+const correctAnswer = zone.dataset.answer;
+const givenAnswer = zone.textContent.trim();
+
+zone.classList.remove('correct','incorrect');
+
+if(givenAnswer === correctAnswer){
+
+score++;
+zone.classList.add('correct');
+
+feedback.innerHTML =
+"✅ Correct<br>" +
+definitions[correctAnswer];
+
+}else{
+
+zone.classList.add('incorrect');
+
+feedback.innerHTML =
+"❌ Correct answer: <strong>" +
+correctAnswer +
+"</strong><br>" +
+definitions[correctAnswer];
+
+}
+
+});
+
+let percentage = Math.round((score / total)*100);
+
+let message="";
+
+if(percentage>=90){
+message="🏆 Excellent!";
+}
+else if(percentage>=75){
+message="⭐ Great Job!";
+}
+else if(percentage>=60){
+message="👍 Good Effort!";
+}
+else{
+message="📚 Keep Practicing!";
+}
+
+document.getElementById('result').innerHTML =
+message + "<br>Score: " +
+score + " / " +
+total + " (" +
+percentage + "%)";
+}
+
+function resetQuiz(){
+
+location.reload();
+
+}
+
+</script>
+
+</body>
+</html>

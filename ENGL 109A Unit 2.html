@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 2 Vocabulary Gap Fill Quiz</title>
+
+<style>
+body{
+    font-family: Arial, sans-serif;
+    max-width: 1100px;
+    margin: 30px auto;
+    padding: 20px;
+    background:#f4f6f9;
+}
+
+h1{
+    color:#2c3e50;
+}
+
+.wordbank{
+    background:#fff3cd;
+    border:1px solid #ffe69c;
+    padding:15px;
+    border-radius:8px;
+    margin-bottom:25px;
+}
+
+.question{
+    background:white;
+    padding:15px;
+    margin-bottom:15px;
+    border-radius:8px;
+    box-shadow:0 1px 4px rgba(0,0,0,0.1);
+}
+
+.correct{
+    border-left:6px solid #28a745;
+    background:#eaf8ee;
+}
+
+.incorrect{
+    border-left:6px solid #dc3545;
+    background:#fdecec;
+}
+
+.feedback{
+    margin-top:10px;
+    font-size:0.95em;
+}
+
+.correct-answer{
+    color:#28a745;
+    font-weight:bold;
+}
+
+.incorrect-answer{
+    color:#dc3545;
+    font-weight:bold;
+}
+
+select{
+    padding:6px;
+    min-width:220px;
+}
+
+button{
+    background:#0078d4;
+    color:white;
+    border:none;
+    padding:10px 20px;
+    margin-right:10px;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#106ebe;
+}
+
+#result{
+    margin-top:20px;
+    font-size:1.2em;
+    font-weight:bold;
+}
+</style>
+</head>
+
+<body>
+
+<h1>Unit 2 Vocabulary Gap Fill Quiz</h1>
+
+<div class="wordbank">
+<h3>Word Bank</h3>
+account for • approximately • consume • correlation • ethnic • experiment • illustrate • play a role in • rare • risk • season • with respect to
+</div>
+
+<form id="quizForm">
+
+<div class="question" id="box1">
+<p>1. The sudden drop in international travel helped _________ the significant decline in local hotel revenues this quarter.</p>
+<select name="q1">
+<option value="">Select an answer</option>
+<option>account for</option>
+<option>consume</option>
+<option>risk</option>
+<option>illustrate</option>
+</select>
+<div class="feedback" id="f1"></div>
+</div>
+
+<div class="question" id="box2">
+<p>2. The highway construction project is expected to take _________ six months to complete.</p>
+<select name="q2">
+<option value="">Select an answer</option>
+<option>approximately</option>
+<option>rare</option>
+<option>correlation</option>
+<option>season</option>
+</select>
+<div class="feedback" id="f2"></div>
+</div>
+
+<div class="question" id="box3">
+<p>3. High-performance athletes need to _________ adequate amounts of protein and carbohydrates.</p>
+<select name="q3">
+<option value="">Select an answer</option>
+<option>consume</option>
+<option>experiment</option>
+<option>account for</option>
+<option>risk</option>
+</select>
+<div class="feedback" id="f3"></div>
+</div>
+
+<div class="question" id="box4">
+<p>4. Recent medical studies show a clear statistical _________ between chronic sleep deprivation and stress levels.</p>
+<select name="q4">
+<option value="">Select an answer</option>
+<option>correlation</option>
+<option>season</option>
+<option>ethnic</option>
+<option>risk</option>
+</select>
+<div class="feedback" id="f4"></div>
+</div>
+
+<div class="question" id="box5">
+<p>5. The city's cultural festival celebrates various _________ groups.</p>
+<select name="q5">
+<option value="">Select an answer</option>
+<option>ethnic</option>
+<option>rare</option>
+<option>approximately</option>
+<option>season</option>
+</select>
+<div class="feedback" id="f5"></div>
+</div>
+
+<div class="question" id="box6">
+<p>6. Environmental scientists plan to _________ with alternative solar panel materials.</p>
+<select name="q6">
+<option value="">Select an answer</option>
+<option>experiment</option>
+<option>consume</option>
+<option>season</option>
+<option>account for</option>
+</select>
+<div class="feedback" id="f6"></div>
+</div>
+
+<div class="question" id="box7">
+<p>7. The lecturer used a series of graphs to _________ how consumer spending habits shift.</p>
+<select name="q7">
+<option value="">Select an answer</option>
+<option>illustrate</option>
+<option>risk</option>
+<option>rare</option>
+<option>consume</option>
+</select>
+<div class="feedback" id="f7"></div>
+</div>
+
+<div class="question" id="box8">
+<p>8. Genetics, diet, and exercise habits all _________ determining long-term health outcomes.</p>
+<select name="q8">
+<option value="">Select an answer</option>
+<option>play a role in</option>
+<option>account for</option>
+<option>season</option>
+<option>correlation</option>
+</select>
+<div class="feedback" id="f8"></div>
+</div>
+
+<div class="question" id="box9">
+<p>9. It is extremely _________ to spot this endangered species of owl in urban environments.</p>
+<select name="q9">
+<option value="">Select an answer</option>
+<option>rare</option>
+<option>ethnic</option>
+<option>approximately</option>
+<option>consume</option>
+</select>
+<div class="feedback" id="f9"></div>
+</div>
+
+<div class="question" id="box10">
+<p>10. Investing heavily in an unproven technology start-up carries a high financial _________.</p>
+<select name="q10">
+<option value="">Select an answer</option>
+<option>risk</option>
+<option>season</option>
+<option>illustrate</option>
+<option>ethnic</option>
+</select>
+<div class="feedback" id="f10"></div>
+</div>
+
+<div class="question" id="box11">
+<p>11. Professional chefs recommend that you _________ the meat generously before roasting it.</p>
+<select name="q11">
+<option value="">Select an answer</option>
+<option>season</option>
+<option>consume</option>
+<option>experiment</option>
+<option>rare</option>
+</select>
+<div class="feedback" id="f11"></div>
+</div>
+
+<div class="question" id="box12">
+<p>12. The board members held a lengthy discussion _________ the proposed changes.</p>
+<select name="q12">
+<option value="">Select an answer</option>
+<option>with respect to</option>
+<option>play a role in</option>
+<option>account for</option>
+<option>approximately</option>
+</select>
+<div class="feedback" id="f12"></div>
+</div>
+
+<button type="button" onclick="gradeQuiz()">Submit Quiz</button>
+<button type="button" onclick="resetQuiz()">Try Again</button>
+
+</form>
+
+<div id="result"></div>
+
+<script>
+
+const answers = {
+q1:["account for","To explain the cause or reason for something."],
+q2:["approximately","Roughly; close to an exact number or amount."],
+q3:["consume","To eat, drink, or ingest."],
+q4:["correlation","A mutual relationship between two variables."],
+q5:["ethnic","Relating to a group with a shared cultural tradition."],
+q6:["experiment","To conduct tests or try new ideas."],
+q7:["illustrate","To explain using examples, charts, or images."],
+q8:["play a role in","To contribute to an outcome."],
+q9:["rare","Not common or frequent."],
+q10:["risk","Exposure to possible loss or danger."],
+q11:["season","To add spices or salt to food."],
+q12:["with respect to","Regarding or concerning."]
+};
+
+function gradeQuiz(){
+
+let score = 0;
+
+for(let i=1;i<=12;i++){
+
+const question = "q"+i;
+const studentAnswer = document.querySelector(`[name="${question}"]`).value;
+const correctAnswer = answers[question][0];
+const definition = answers[question][1];
+
+const box = document.getElementById("box"+i);
+const feedback = document.getElementById("f"+i);
+
+box.classList.remove("correct","incorrect");
+
+if(studentAnswer === correctAnswer){
+
+score++;
+box.classList.add("correct");
+
+feedback.innerHTML =
+`<span class="correct-answer">✓ Correct</span><br>
+${definition}`;
+
+}else{
+
+box.classList.add("incorrect");
+
+feedback.innerHTML =
+`<span class="incorrect-answer">✗ Incorrect</span><br>
+Correct answer: <strong>${correctAnswer}</strong><br>
+${definition}`;
+}
+}
+
+const percent = Math.round((score/12)*100);
+
+let message = "";
+
+if(percent >= 90){
+message = "🏆 Excellent!";
+}
+else if(percent >= 75){
+message = "⭐ Great Job!";
+}
+else if(percent >= 60){
+message = "👍 Good Effort!";
+}
+else{
+message = "📚 Keep Practicing!";
+}
+
+document.getElementById("result").innerHTML =
+`${message}<br>Score: ${score}/12 (${percent}%)`;
+}
+
+function resetQuiz(){
+
+document.getElementById("quizForm").reset();
+
+for(let i=1;i<=12;i++){
+document.getElementById("box"+i).classList.remove("correct","incorrect");
+document.getElementById("f"+i).innerHTML = "";
+}
+
+document.getElementById("result").innerHTML = "";
+}
+</script>
+
+</body>
+</html>
