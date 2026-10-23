@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Vocabulary Gap Fill Generator</title>
+
+<style>
+
+body{
+    font-family:Segoe UI,Arial,sans-serif;
+    background:linear-gradient(135deg,#0a4d68,#088395);
+    color:white;
+    margin:0;
+    padding:20px;
+}
+
+.container{
+    max-width:1200px;
+    margin:auto;
+}
+
+h1{
+    text-align:center;
+}
+
+.controls{
+    display:flex;
+    flex-wrap:wrap;
+    gap:15px;
+    justify-content:center;
+    margin-bottom:25px;
+}
+
+select,button{
+    padding:10px;
+    font-size:16px;
+    border:none;
+    border-radius:8px;
+}
+
+button{
+    background:#ffd166;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+button:hover{
+    background:#ffea99;
+}
+
+.panel{
+    background:rgba(255,255,255,0.15);
+    padding:20px;
+    border-radius:15px;
+    backdrop-filter:blur(10px);
+    margin-bottom:20px;
+}
+
+.word-bank{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+}
+
+.word{
+    background:#ffffff;
+    color:#000;
+    padding:8px 12px;
+    border-radius:8px;
+    cursor:grab;
+    user-select:none;
+}
+
+.question{
+    margin-bottom:20px;
+}
+
+.dropzone{
+    margin-top:8px;
+    min-height:50px;
+    border:2px dashed white;
+    border-radius:10px;
+    padding:10px;
+}
+
+.correct{
+    background:#4caf50 !important;
+    color:white !important;
+}
+
+.incorrect{
+    background:#e53935 !important;
+    color:white !important;
+}
+
+#score{
+    font-size:22px;
+    text-align:center;
+    font-weight:bold;
+    margin-top:20px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Vocabulary Gap-Fill Generator</h1>
+
+<div class="panel controls">
+
+<select id="levelSelect">
+<option>Select Level</option>
+</select>
+
+<select id="unitSelect">
+<option>Select Unit</option>
+</select>
+
+<select id="strandSelect">
+<option>Select Strand</option>
+</select>
+
+<button onclick="generateActivity()">
+Generate Activity
+</button>
+
+<button onclick="checkAnswers()">
+Check Answers
+</button>
+
+</div>
+
+<div class="panel">
+
+<h2>Word Bank</h2>
+
+<div class="word-bank" id="wordBank"></div>
+
+</div>
+
+<div class="panel">
+
+<h2>Questions</h2>
+
+<div id="questions"></div>
+
+<div id="score"></div>
+
+</div>
+
+</div>
+
+<script>
+
+let allWords=[];
+let answerKey=[];
+
+fetch("WordMorass.json")
+.then(response=>response.json())
+.then(data=>{
+
+    allWords=data.filter(x=>
+        x.Level &&
+        x.Unit &&
+        x.Strand
+    );
+
+    initializeDropdowns();
+});
+
+function initializeDropdowns(){
+
+    const levels=[
+        ...new Set(
+            allWords.map(x=>x.Level)
+        )
+    ].sort();
+
+    const levelSelect=
+        document.getElementById("levelSelect");
+
+    levels.forEach(level=>{
+
+        const option=
+        document.createElement("option");
+
+        option.value=level;
+        option.textContent=level;
+
+        levelSelect.appendChild(option);
+
+    });
+
+}
+
+document
+.getElementById("levelSelect")
+.addEventListener("change",updateUnits);
+
+document
+.getElementById("unitSelect")
+.addEventListener("change",updateStrands);
+
+function updateUnits(){
+
+    const level=
+      document.getElementById("levelSelect").value;
+
+    const units=[
+        ...new Set(
+          allWords
+          .filter(x=>x.Level===level)
+          .map(x=>x.Unit)
+        )
+    ].sort((a,b)=>a-b);
+
+    const unitSelect=
+      document.getElementById("unitSelect");
+
+    unitSelect.innerHTML=
+      "<option>Select Unit</option>";
+
+    units.forEach(unit=>{
+
+        const option=
+        document.createElement("option");
+
+        option.value=unit;
+        option.textContent=unit;
+
+        unitSelect.appendChild(option);
+
+    });
+
+    document
+    .getElementById("strandSelect")
+    .innerHTML=
+    "<option>Select Strand</option>";
+
+}
+
+function updateStrands(){
+
+    const level=
+      document.getElementById("levelSelect").value;
+
+    const unit=
+      document.getElementById("unitSelect").value;
+
+    const strands=[
+        ...new Set(
+          allWords
+          .filter(x=>
+            x.Level===level &&
+            String(x.Unit)===String(unit)
+          )
+          .map(x=>x.Strand)
+        )
+    ];
+
+    const strandSelect=
+      document.getElementById("strandSelect");
+
+    strandSelect.innerHTML=
+      "<option>Select Strand</option>";
+
+    strands.forEach(strand=>{
+
+        const option=
+        document.createElement("option");
+
+        option.value=strand;
+        option.textContent=strand;
+
+        strandSelect.appendChild(option);
+
+    });
+
+}
+
+function shuffle(arr){
+
+    let a=[...arr];
+
+    for(let i=a.length-1;i>0;i--){
+
+        const j=
+        Math.floor(Math.random()*(i+1));
+
+        [a[i],a[j]]=
+        [a[j],a[i]];
+    }
+
+    return a;
+}
+
+function generateActivity(){
+
+    const level=
+      document.getElementById("levelSelect").value;
+
+    const unit=
+      document.getElementById("unitSelect").value;
+
+    const strand=
+      document.getElementById("strandSelect").value;
+
+    let filtered=
+    allWords.filter(x=>
+
+      x.Level===level &&
+      String(x.Unit)===String(unit) &&
+      x.Strand===strand
+
+    );
+
+    if(filtered.length<12){
+
+        alert(
+          "Need at least 12 words in this category."
+        );
+
+        return;
+    }
+
+    const wordBank=
+      shuffle(filtered).slice(0,12);
+
+    const targets=
+      shuffle([...wordBank]).slice(0,8);
+
+    answerKey=
+      targets.map(x=>x.Term);
+
+    buildWordBank(wordBank);
+
+    buildQuestions(targets);
+
+    document.getElementById("score").innerHTML="";
+
+}
+
+function buildWordBank(words){
+
+    const bank=
+      document.getElementById("wordBank");
+
+    bank.innerHTML="";
+
+    shuffle(words).forEach(word=>{
+
+        const div=
+        document.createElement("div");
+
+        div.className="word";
+
+        div.textContent=word.Term;
+
+        div.draggable=true;
+
+        div.id=
+          "word_"+Math.random();
+
+        div.addEventListener(
+          "dragstart",
+          drag
+        );
+
+        bank.appendChild(div);
+
+    });
+
+}
+
+function buildQuestions(targets){
+
+    const questions=
+      document.getElementById("questions");
+
+    questions.innerHTML="";
+
+    targets.forEach((word,index)=>{
+
+        const div=
+        document.createElement("div");
+
+        div.className="question";
+
+        div.innerHTML=`
+
+        <p>
+        ${index+1}.
+        Which word means:
+        <strong>${word.Meaning}</strong>
+        </p>
+
+        <div
+        class="dropzone"
+        data-answer="${word.Term}"
+        ondrop="drop(event)"
+        ondragover="allowDrop(event)">
+        </div>
+
+        `;
+
+        questions.appendChild(div);
+
+    });
+
+}
+
+function allowDrop(ev){
+
+    ev.preventDefault();
+
+}
+
+function drag(ev){
+
+    ev.dataTransfer.setData(
+      "text",
+      ev.target.id
+    );
+
+}
+
+function drop(ev){
+
+    ev.preventDefault();
+
+    const id=
+      ev.dataTransfer.getData("text");
+
+    const item=
+      document.getElementById(id);
+
+    ev.target.innerHTML="";
+
+    ev.target.appendChild(item);
+
+}
+
+function checkAnswers(){
+
+    let score=0;
+
+    const zones=
+      document.querySelectorAll(".dropzone");
+
+    zones.forEach(zone=>{
+
+        zone.classList.remove(
+          "correct",
+          "incorrect"
+        );
+
+        const answer=
+          zone.dataset.answer;
+
+        if(
+          zone.firstChild &&
+          zone.firstChild.textContent===answer
+        ){
+
+            score++;
+
+            zone.classList.add("correct");
+
+        }
+
+        else{
+
+            zone.classList.add("incorrect");
+
+        }
+
+    });
+
+    document
+    .getElementById("score")
+    .innerHTML=
+    `Score: ${score} / 8`;
+
+}
+
+</script>
+
+</body>
+</html>
