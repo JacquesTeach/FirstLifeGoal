@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smallpox Quiz Based On Reading Passage</title>
+
+<style>
+body{
+    font-family: Arial, sans-serif;
+    max-width:1100px;
+    margin:auto;
+    padding:20px;
+    background:#f4f6f8;
+}
+.container{
+    background:white;
+    padding:25px;
+    border-radius:10px;
+    box-shadow:0 2px 6px rgba(0,0,0,.15);
+}
+.question{
+    margin-bottom:25px;
+    padding:15px;
+    border:1px solid #ddd;
+    border-radius:8px;
+}
+label{
+    display:block;
+    margin:6px 0;
+}
+button{
+    padding:12px 20px;
+    font-size:16px;
+}
+.correct{
+    background:#d4edda;
+}
+.incorrect{
+    background:#f8d7da;
+}
+.answerKey{
+    margin-top:20px;
+    padding:15px;
+    background:#eef5ff;
+    border-radius:8px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Smallpox: Developing a Vaccine</h1>
+
+<p>
+Read the <a href="Smallpox Reading Passage.html">passage</a>. Choose the best answer for each question.
+</p>
+
+<form id="quizForm"></form>
+
+<button type="button" onclick="gradeQuiz()">Submit Quiz</button>
+
+<div id="results"></div>
+
+</div>
+
+<script>
+
+const questions = [
+
+/* Topic Sentence Questions */
+
+{
+q:"1. Which best paraphrases the main idea of the introduction?",
+c:"The eradication of smallpox is considered a major medical achievement because of the disease's historic severity.",
+o:[
+"The eradication of smallpox is considered a major medical achievement because of the disease's historic severity.",
+"Smallpox disappeared largely because modern societies became healthier.",
+"The WHO developed a vaccine after smallpox had already disappeared.",
+"Medical researchers were surprised that smallpox caused high mortality."
+]
+},
+
+{
+q:"2. Which best paraphrases the paragraph about symptoms, transmission, and mortality?",
+c:"Smallpox is a serious viral disease that follows a recognizable progression and often results in death.",
+o:[
+"Smallpox is a serious viral disease that follows a recognizable progression and often results in death.",
+"Smallpox is difficult to diagnose because symptoms vary significantly from person to person.",
+"The most dangerous effect of smallpox was its ability to survive in animals.",
+"Permanent scarring was generally considered a greater concern than mortality."
+]
+},
+
+{
+q:"3. Which best paraphrases the main idea of the variolation paragraph?",
+c:"Variolation reduced mortality compared with natural infection but still involved substantial risk.",
+o:[
+"Variolation reduced mortality compared with natural infection but still involved substantial risk.",
+"Variolation completely prevented the spread of smallpox in most countries.",
+"Variolation and vaccination relied on the same scientific principles.",
+"Variolation became popular because it carried no significant dangers."
+]
+},
+
+{
+q:"4. Which best paraphrases the paragraph about Jenner's work?",
+c:"Vaccination represented a significant advancement in disease prevention beyond earlier control methods.",
+o:[
+"Vaccination represented a significant advancement in disease prevention beyond earlier control methods.",
+"Vaccination was adopted worldwide immediately after Jenner's discovery.",
+"Cowpox proved more dangerous than smallpox in some situations.",
+"Vaccination eliminated the need for public health laws."
+]
+},
+
+{
+q:"5. Which best paraphrases the section explaining eradication?",
+c:"A combination of disease characteristics, vaccines, and coordinated action made eradication possible.",
+o:[
+"A combination of disease characteristics, vaccines, and coordinated action made eradication possible.",
+"The disease disappeared primarily because it could not survive in tropical climates.",
+"Monitoring systems were more important than vaccines in every stage of eradication.",
+"Smallpox vanished largely because infected individuals recovered quickly."
+]
+},
+
+/* Supporting Details */
+
+{
+q:"6. Which detail best supports the idea that vaccine technology improved over time?",
+c:"A freeze-drying technique allowed vaccines to be stored for months without refrigeration.",
+o:[
+"A freeze-drying technique allowed vaccines to be stored for months without refrigeration.",
+"The WHO established monitoring systems for outbreaks.",
+"Vaccination became compulsory for some infants in Britain.",
+"Cowpox exposure produced immunity against smallpox."
+]
+},
+
+{
+q:"7. Which detail best supports the claim that smallpox was highly dangerous?",
+c:"Approximately 30% of infected individuals died from the disease.",
+o:[
+"Approximately 30% of infected individuals died from the disease.",
+"The disease produced fluid-filled spots on the skin.",
+"Vaccines were difficult to store in hot climates.",
+"The incubation period lasted between 7 and 17 days."
+]
+},
+
+{
+q:"8. Which detail best supports the importance of international cooperation?",
+c:"The WHO created a ten-year global eradication campaign supported by monitoring systems.",
+o:[
+"The WHO created a ten-year global eradication campaign supported by monitoring systems.",
+"Edward Jenner developed vaccination in 1796.",
+"Variolation remained common in isolated communities.",
+"Smallpox often caused permanent scars."
+]
+},
+
+{
+q:"9. Which detail best supports the effectiveness of vaccination?",
+c:"Individuals infected with cowpox developed immunity to smallpox.",
+o:[
+"Individuals infected with cowpox developed immunity to smallpox.",
+"Vaccination became compulsory in the UK in 1853.",
+"Dried vaccines were developed in Europe.",
+"WHO declared eradication in 1979."
+]
+},
+
+{
+q:"10. Which detail best supports the idea that eradication required technology as well as policy?",
+c:"Better vaccines and improved monitoring systems contributed to the WHO campaign.",
+o:[
+"Better vaccines and improved monitoring systems contributed to the WHO campaign.",
+"Variolation lowered mortality rates.",
+"Smallpox was largely restricted to humans.",
+"The last naturally occurring case was reported in Somalia."
+]
+},
+
+/* Relative Clause Questions */
+
+{
+q:"11. In the phrase 'which marked a major step forward,' the word 'which' refers to:",
+c:"the discovery of vaccination",
+o:[
+"the discovery of vaccination",
+"cowpox",
+"Edward Jenner",
+"smallpox"
+]
+},
+
+{
+q:"12. In the phrase 'which meant the vaccine could be stored for months,' 'which' refers to:",
+c:"the freeze-drying technique",
+o:[
+"the freeze-drying technique",
+"the outbreak in New York City",
+"the dried vaccine",
+"refrigeration"
+]
+},
+
+{
+q:"13. The clause 'that allows the body to develop resistance' modifies:",
+c:"a preparation",
+o:[
+"a preparation",
+"the body",
+"resistance",
+"a disease"
+]
+},
+
+{
+q:"14. The clause 'which made its eradication possible' primarily explains:",
+c:"why eradication succeeded",
+o:[
+"why eradication succeeded",
+"where eradication began",
+"when eradication occurred",
+"who organized eradication"
+]
+},
+
+{
+q:"15. In 'stocks of variola virus set aside for research purposes,' the phrase 'set aside for research purposes' identifies:",
+c:"which virus stocks are being discussed",
+o:[
+"which virus stocks are being discussed",
+"when the virus became dangerous",
+"why vaccination was introduced",
+"where the virus was discovered"
+]
+},
+
+/* Inference & Analysis */
+
+{
+q:"16. What can reasonably be inferred about freeze-drying technology?",
+c:"It helped make vaccination practical in regions without reliable refrigeration.",
+o:[
+"It helped make vaccination practical in regions without reliable refrigeration.",
+"It eliminated the need for disease surveillance.",
+"It made vaccination more effective than immunity obtained from cowpox.",
+"It guaranteed the complete eradication of smallpox."
+]
+},
+
+{
+q:"17. What can be inferred from the rapid development of symptoms?",
+c:"Cases were easier to identify before extensive unnoticed transmission occurred.",
+o:[
+"Cases were easier to identify before extensive unnoticed transmission occurred.",
+"The disease spread more slowly than most viral illnesses.",
+"Infected individuals became immune before symptoms appeared.",
+"Animals could not become infected."
+]
+},
+
+{
+q:"18. Why did high mortality probably contribute to global agreement on eradication efforts?",
+c:"Governments had stronger incentives to support coordinated action against a severe threat.",
+o:[
+"Governments had stronger incentives to support coordinated action against a severe threat.",
+"Mortality eliminated the need for monitoring systems.",
+"Countries viewed vaccination as less important than treatment.",
+"High mortality reduced the need for international organizations."
+]
+},
+
+{
+q:"19. Why does the author mention biological warfare near the end of the passage?",
+c:"To emphasize that eradication does not remove every possible future risk.",
+o:[
+"To emphasize that eradication does not remove every possible future risk.",
+"To suggest that biological warfare was responsible for eradication.",
+"To argue that vaccination programs should be discontinued.",
+"To demonstrate that the virus is commonly spread by animals."
+]
+},
+
+{
+q:"20. Which conclusion is best supported by the entire passage?",
+c:"Scientific innovation combined with organized public-health efforts can overcome major diseases.",
+o:[
+"Scientific innovation combined with organized public-health efforts can overcome major diseases.",
+"Vaccination is effective only when required by law.",
+"Technological progress is more important than international cooperation.",
+"Natural immunity is generally preferable to vaccination."
+]
+}
+
+];
+
+const form=document.getElementById("quizForm");
+
+questions.forEach((q,i)=>{
+
+let html=`<div class="question" id="q${i}">
+<p><strong>${q.q}</strong></p>`;
+
+["A","B","C","D"].forEach((letter,index)=>{
+html+=`
+<label>
+<input type="radio" name="q${i}" value="${q.o[index]}">
+${letter}. ${q.o[index]}
+</label>`;
+});
+
+html+="</div>";
+
+form.innerHTML+=html;
+});
+
+function gradeQuiz(){
+
+let score=0;
+let key="<div class='answerKey'><h2>Answer Key</h2><ol>";
+
+questions.forEach((q,i)=>{
+
+const selected=document.querySelector(`input[name="q${i}"]:checked`);
+const box=document.getElementById(`q${i}`);
+
+box.classList.remove("correct","incorrect");
+
+if(selected && selected.value===q.c){
+score++;
+box.classList.add("correct");
+}else{
+box.classList.add("incorrect");
+}
+
+key+=`<li>${q.c}</li>`;
+});
+
+key+="</ol></div>";
+
+document.getElementById("results").innerHTML=
+`<h2>Final Score: ${score}/20 (${Math.round(score/20*100)}%)</h2>` + key;
+
+window.scrollTo(0,document.body.scrollHeight);
+}
+
+</script>
+
+</body>
+</html>
