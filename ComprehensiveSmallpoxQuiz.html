@@ -3,35 +3,55 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Smallpox Quiz Based On Reading Passage</title>
+<title>Smallpox Quiz (20 Questions)</title>
 
 <style>
 body{
-    font-family: Arial, sans-serif;
-    max-width:1100px;
+    font-family:Arial,Helvetica,sans-serif;
+    max-width:1000px;
     margin:auto;
     padding:20px;
-    background:#f4f6f8;
+    background:#f4f7fb;
 }
-.container{
-    background:white;
-    padding:25px;
+h1{
+    text-align:center;
+    color:#1f4e79;
+}
+#timer{
+    font-size:20px;
+    font-weight:bold;
+    color:#b22222;
+    text-align:center;
+    margin-bottom:15px;
+}
+.progress-container{
+    width:100%;
+    background:#ddd;
     border-radius:10px;
-    box-shadow:0 2px 6px rgba(0,0,0,.15);
+    overflow:hidden;
+    margin-bottom:20px;
+}
+.progress-bar{
+    height:24px;
+    width:0%;
+    background:#28a745;
+    text-align:center;
+    color:white;
+    line-height:24px;
+    font-weight:bold;
 }
 .question{
-    margin-bottom:25px;
+    background:white;
     padding:15px;
-    border:1px solid #ddd;
-    border-radius:8px;
+    margin-bottom:15px;
+    border-radius:10px;
+    box-shadow:0 2px 5px rgba(0,0,0,.1);
 }
-label{
-    display:block;
-    margin:6px 0;
+.question h3{
+    margin-top:0;
 }
-button{
-    padding:12px 20px;
-    font-size:16px;
+.option{
+    margin:8px 0;
 }
 .correct{
     background:#d4edda;
@@ -39,316 +59,391 @@ button{
 .incorrect{
     background:#f8d7da;
 }
-.answerKey{
+button{
+    padding:12px 25px;
+    font-size:16px;
+    background:#1f4e79;
+    color:white;
+    border:none;
+    border-radius:6px;
+    cursor:pointer;
+}
+button:hover{
+    background:#163857;
+}
+#results{
     margin-top:20px;
-    padding:15px;
-    background:#eef5ff;
-    border-radius:8px;
+    font-size:22px;
+    font-weight:bold;
+    text-align:center;
+}
+.feedback{
+    margin-top:10px;
+    font-weight:bold;
 }
 </style>
 </head>
-
 <body>
 
-<div class="container">
+<h1>Smallpox: Advanced Reading Quiz</h1><BR>
+<a href="Smallpox Reading Passage.html">Read the passage. Complete the quiz.</a><BR>    
 
-<h1>Smallpox: Developing a Vaccine</h1>
+<div id="timer">Time: 30:00</div>
 
-<p>
-Read the <a href="Smallpox Reading Passage.html">passage</a>. Choose the best answer for each question.
-</p>
+<div class="progress-container">
+    <div id="progressBar" class="progress-bar">0%</div>
+</div>
 
 <form id="quizForm"></form>
 
-<button type="button" onclick="gradeQuiz()">Submit Quiz</button>
+<div style="text-align:center;margin-top:20px;">
+    <button type="button" onclick="gradeQuiz()">Submit Quiz</button>
+</div>
 
 <div id="results"></div>
-
-</div>
 
 <script>
 
 const questions = [
 
-/* Topic Sentence Questions */
-
 {
-q:"1. Which best paraphrases the main idea of the introduction?",
-c:"The eradication of smallpox is considered a major medical achievement because of the disease's historic severity.",
-o:[
-"The eradication of smallpox is considered a major medical achievement because of the disease's historic severity.",
-"Smallpox disappeared largely because modern societies became healthier.",
-"The WHO developed a vaccine after smallpox had already disappeared.",
-"Medical researchers were surprised that smallpox caused high mortality."
-]
+q:"Which statement best expresses the main idea of the passage?",
+options:[
+"Smallpox was eradicated through a combination of scientific innovation and international public-health efforts.",
+"Smallpox disappeared naturally because living conditions improved worldwide.",
+"The history of smallpox is mainly a history of European medicine.",
+"Modern vaccination programs are less important than traditional remedies."
+],
+answer:0
 },
 
 {
-q:"2. Which best paraphrases the paragraph about symptoms, transmission, and mortality?",
-c:"Smallpox is a serious viral disease that follows a recognizable progression and often results in death.",
-o:[
-"Smallpox is a serious viral disease that follows a recognizable progression and often results in death.",
-"Smallpox is difficult to diagnose because symptoms vary significantly from person to person.",
-"The most dangerous effect of smallpox was its ability to survive in animals.",
-"Permanent scarring was generally considered a greater concern than mortality."
-]
+q:"Why does the author discuss variolation before describing Jenner's work?",
+options:[
+"To show that attempts to prevent smallpox existed before vaccination.",
+"To argue that variolation was safer than vaccination.",
+"To demonstrate that variolation completely eradicated the disease.",
+"To prove that physicians rejected preventive methods."
+],
+answer:0
 },
 
 {
-q:"3. Which best paraphrases the main idea of the variolation paragraph?",
-c:"Variolation reduced mortality compared with natural infection but still involved substantial risk.",
-o:[
-"Variolation reduced mortality compared with natural infection but still involved substantial risk.",
-"Variolation completely prevented the spread of smallpox in most countries.",
-"Variolation and vaccination relied on the same scientific principles.",
-"Variolation became popular because it carried no significant dangers."
-]
+q:"What can be inferred about smallpox before the development of effective prevention methods?",
+options:[
+"It posed a serious threat to large populations.",
+"It affected only isolated communities.",
+"It was usually a mild childhood illness.",
+"It spread more slowly than most diseases."
+],
+answer:0
 },
 
 {
-q:"4. Which best paraphrases the paragraph about Jenner's work?",
-c:"Vaccination represented a significant advancement in disease prevention beyond earlier control methods.",
-o:[
-"Vaccination represented a significant advancement in disease prevention beyond earlier control methods.",
-"Vaccination was adopted worldwide immediately after Jenner's discovery.",
-"Cowpox proved more dangerous than smallpox in some situations.",
-"Vaccination eliminated the need for public health laws."
-]
+q:"Which detail most strongly supports the claim that vaccination represented a major improvement over earlier methods?",
+options:[
+"It reduced reliance on deliberately infecting people with smallpox material.",
+"It was introduced after the twentieth century.",
+"It required no scientific observation.",
+"It eliminated the need for public-health systems."
+],
+answer:0
 },
 
 {
-q:"5. Which best paraphrases the section explaining eradication?",
-c:"A combination of disease characteristics, vaccines, and coordinated action made eradication possible.",
-o:[
-"A combination of disease characteristics, vaccines, and coordinated action made eradication possible.",
-"The disease disappeared primarily because it could not survive in tropical climates.",
-"Monitoring systems were more important than vaccines in every stage of eradication.",
-"Smallpox vanished largely because infected individuals recovered quickly."
-]
-},
-
-/* Supporting Details */
-
-{
-q:"6. Which detail best supports the idea that vaccine technology improved over time?",
-c:"A freeze-drying technique allowed vaccines to be stored for months without refrigeration.",
-o:[
-"A freeze-drying technique allowed vaccines to be stored for months without refrigeration.",
-"The WHO established monitoring systems for outbreaks.",
-"Vaccination became compulsory for some infants in Britain.",
-"Cowpox exposure produced immunity against smallpox."
-]
+q:"The passage suggests that Jenner's success was primarily based on:",
+options:[
+"careful observation and experimentation.",
+"advanced laboratory technology.",
+"financial support from governments.",
+"traditional folk beliefs."
+],
+answer:0
 },
 
 {
-q:"7. Which detail best supports the claim that smallpox was highly dangerous?",
-c:"Approximately 30% of infected individuals died from the disease.",
-o:[
-"Approximately 30% of infected individuals died from the disease.",
-"The disease produced fluid-filled spots on the skin.",
-"Vaccines were difficult to store in hot climates.",
-"The incubation period lasted between 7 and 17 days."
-]
+q:"Which sentence is the best paraphrase of a likely topic sentence about WHO's campaign?",
+options:[
+"Global cooperation played a crucial role in eliminating smallpox.",
+"Smallpox remained common because governments ignored it.",
+"Medical discoveries are rarely useful without hospitals.",
+"International organizations usually focus on local problems."
+],
+answer:0
 },
 
 {
-q:"8. Which detail best supports the importance of international cooperation?",
-c:"The WHO created a ten-year global eradication campaign supported by monitoring systems.",
-o:[
-"The WHO created a ten-year global eradication campaign supported by monitoring systems.",
-"Edward Jenner developed vaccination in 1796.",
-"Variolation remained common in isolated communities.",
-"Smallpox often caused permanent scars."
-]
+q:"What is the author's most likely purpose for mentioning the World Health Organization?",
+options:[
+"To illustrate how coordinated international action contributed to eradication.",
+"To criticize global health agencies.",
+"To compare WHO with nineteenth-century doctors.",
+"To explain how viruses evolve."
+],
+answer:0
 },
 
 {
-q:"9. Which detail best supports the effectiveness of vaccination?",
-c:"Individuals infected with cowpox developed immunity to smallpox.",
-o:[
-"Individuals infected with cowpox developed immunity to smallpox.",
-"Vaccination became compulsory in the UK in 1853.",
-"Dried vaccines were developed in Europe.",
-"WHO declared eradication in 1979."
-]
+q:"Which inference is most reasonable based on the campaign against smallpox?",
+options:[
+"Eradication required more than a scientific discovery alone.",
+"Scientific knowledge was unnecessary once vaccines existed.",
+"Only wealthy nations participated in disease control.",
+"Vaccination programs succeeded without monitoring outbreaks."
+],
+answer:0
 },
 
 {
-q:"10. Which detail best supports the idea that eradication required technology as well as policy?",
-c:"Better vaccines and improved monitoring systems contributed to the WHO campaign.",
-o:[
-"Better vaccines and improved monitoring systems contributed to the WHO campaign.",
-"Variolation lowered mortality rates.",
-"Smallpox was largely restricted to humans.",
-"The last naturally occurring case was reported in Somalia."
-]
-},
-
-/* Relative Clause Questions */
-
-{
-q:"11. In the phrase 'which marked a major step forward,' the word 'which' refers to:",
-c:"the discovery of vaccination",
-o:[
-"the discovery of vaccination",
-"cowpox",
-"Edward Jenner",
-"smallpox"
-]
+q:"Choose the answer that correctly completes the relative-clause sentence: 'Jenner developed a vaccine ______ changed medical history.'",
+options:[
+"that",
+"whom",
+"whose",
+"where"
+],
+answer:0
 },
 
 {
-q:"12. In the phrase 'which meant the vaccine could be stored for months,' 'which' refers to:",
-c:"the freeze-drying technique",
-o:[
-"the freeze-drying technique",
-"the outbreak in New York City",
-"the dried vaccine",
-"refrigeration"
-]
+q:"Choose the answer that correctly completes the relative-clause sentence: 'Smallpox, ______ killed millions, was eventually eradicated.'",
+options:[
+"which",
+"whose",
+"where",
+"whom"
+],
+answer:0
 },
 
 {
-q:"13. The clause 'that allows the body to develop resistance' modifies:",
-c:"a preparation",
-o:[
-"a preparation",
-"the body",
-"resistance",
-"a disease"
-]
+q:"What does the passage imply about the relationship between science and public policy?",
+options:[
+"Both were necessary for successful eradication.",
+"Science prevented governments from taking action.",
+"Public policy replaced scientific research.",
+"The two were largely unrelated."
+],
+answer:0
 },
 
 {
-q:"14. The clause 'which made its eradication possible' primarily explains:",
-c:"why eradication succeeded",
-o:[
-"why eradication succeeded",
-"where eradication began",
-"when eradication occurred",
-"who organized eradication"
-]
+q:"Which detail would best support the author's argument that smallpox could be eradicated?",
+options:[
+"The disease had characteristics that made worldwide vaccination effective.",
+"Most viruses disappear without intervention.",
+"Doctors stopped studying infectious diseases.",
+"The disease was confined to one city."
+],
+answer:0
 },
 
 {
-q:"15. In 'stocks of variola virus set aside for research purposes,' the phrase 'set aside for research purposes' identifies:",
-c:"which virus stocks are being discussed",
-o:[
-"which virus stocks are being discussed",
-"when the virus became dangerous",
-"why vaccination was introduced",
-"where the virus was discovered"
-]
-},
-
-/* Inference & Analysis */
-
-{
-q:"16. What can reasonably be inferred about freeze-drying technology?",
-c:"It helped make vaccination practical in regions without reliable refrigeration.",
-o:[
-"It helped make vaccination practical in regions without reliable refrigeration.",
-"It eliminated the need for disease surveillance.",
-"It made vaccination more effective than immunity obtained from cowpox.",
-"It guaranteed the complete eradication of smallpox."
-]
+q:"In context, the word 'eradicated' most nearly means:",
+options:[
+"completely eliminated",
+"temporarily reduced",
+"carefully examined",
+"unexpectedly discovered"
+],
+answer:0
 },
 
 {
-q:"17. What can be inferred from the rapid development of symptoms?",
-c:"Cases were easier to identify before extensive unnoticed transmission occurred.",
-o:[
-"Cases were easier to identify before extensive unnoticed transmission occurred.",
-"The disease spread more slowly than most viral illnesses.",
-"Infected individuals became immune before symptoms appeared.",
-"Animals could not become infected."
-]
+q:"Why might the author describe smallpox as unique among human diseases?",
+options:[
+"Because it became the first disease eradicated worldwide.",
+"Because it was never contagious.",
+"Because it affected animals but not humans.",
+"Because it existed only in recent history."
+],
+answer:0
 },
 
 {
-q:"18. Why did high mortality probably contribute to global agreement on eradication efforts?",
-c:"Governments had stronger incentives to support coordinated action against a severe threat.",
-o:[
-"Governments had stronger incentives to support coordinated action against a severe threat.",
-"Mortality eliminated the need for monitoring systems.",
-"Countries viewed vaccination as less important than treatment.",
-"High mortality reduced the need for international organizations."
-]
+q:"Which conclusion is best supported by the passage?",
+options:[
+"Public-health achievements often depend on sustained international cooperation.",
+"Medical breakthroughs always produce immediate results.",
+"Historical diseases have little relevance today.",
+"Vaccines are effective only in developed countries."
+],
+answer:0
 },
 
 {
-q:"19. Why does the author mention biological warfare near the end of the passage?",
-c:"To emphasize that eradication does not remove every possible future risk.",
-o:[
-"To emphasize that eradication does not remove every possible future risk.",
-"To suggest that biological warfare was responsible for eradication.",
-"To argue that vaccination programs should be discontinued.",
-"To demonstrate that the virus is commonly spread by animals."
-]
+q:"What is the function of the historical examples in the passage?",
+options:[
+"To show the progression from early prevention methods to eradication.",
+"To entertain readers with unusual stories.",
+"To compare unrelated diseases.",
+"To minimize the importance of vaccination."
+],
+answer:0
 },
 
 {
-q:"20. Which conclusion is best supported by the entire passage?",
-c:"Scientific innovation combined with organized public-health efforts can overcome major diseases.",
-o:[
-"Scientific innovation combined with organized public-health efforts can overcome major diseases.",
-"Vaccination is effective only when required by law.",
-"Technological progress is more important than international cooperation.",
-"Natural immunity is generally preferable to vaccination."
-]
+q:"Which statement would the author most likely agree with?",
+options:[
+"Scientific discoveries are most effective when widely implemented.",
+"Local traditions should replace modern medicine.",
+"Eradication efforts are generally impossible.",
+"Diseases disappear without organized intervention."
+],
+answer:0
+},
+
+{
+q:"Choose the best paraphrase: 'Smallpox eradication was not the result of a single event.'",
+options:[
+"The elimination of smallpox occurred through multiple developments and coordinated efforts.",
+"One discovery alone immediately ended smallpox worldwide.",
+"Smallpox vanished unexpectedly without explanation.",
+"Researchers never understood how smallpox spread."
+],
+answer:0
+},
+
+{
+q:"Based on the passage, why was surveillance important during eradication campaigns?",
+options:[
+"It helped identify and contain remaining outbreaks.",
+"It replaced vaccination as the primary strategy.",
+"It prevented scientists from collecting data.",
+"It focused only on historical cases."
+],
+answer:0
+},
+
+{
+q:"What broader lesson can readers draw from the history of smallpox?",
+options:[
+"Global problems can sometimes be solved through evidence-based cooperation.",
+"Scientific knowledge has limited practical value.",
+"International health efforts generally fail.",
+"Prevention is less effective than treatment."
+],
+answer:0
 }
 
 ];
 
-const form=document.getElementById("quizForm");
+function shuffleAnswers(question){
+    let opts = question.options.map((x,i)=>({text:x,isCorrect:i===question.answer}));
+    for(let i=opts.length-1;i>0;i--){
+        let j=Math.floor(Math.random()*(i+1));
+        [opts[i],opts[j]]=[opts[j],opts[i]];
+    }
+    question.shuffled=opts;
+}
 
-questions.forEach((q,i)=>{
+questions.forEach(shuffleAnswers);
 
-let html=`<div class="question" id="q${i}">
-<p><strong>${q.q}</strong></p>`;
+const quizForm=document.getElementById("quizForm");
 
-["A","B","C","D"].forEach((letter,index)=>{
-html+=`
-<label>
-<input type="radio" name="q${i}" value="${q.o[index]}">
-${letter}. ${q.o[index]}
-</label>`;
+questions.forEach((q,index)=>{
+    const div=document.createElement("div");
+    div.className="question";
+
+    let html=`<h3>${index+1}. ${q.q}</h3>`;
+
+    q.shuffled.forEach((opt,i)=>{
+        const letter=["A","B","C","D"][i];
+        html+=`
+        <div class="option">
+            <label>
+                <input type="radio" name="q${index}" value="${i}" onchange="updateProgress()">
+                <strong>${letter}.</strong> ${opt.text}
+            </label>
+        </div>`;
+    });
+
+    html+=`<div class="feedback" id="fb${index}"></div>`;
+    div.innerHTML=html;
+    quizForm.appendChild(div);
 });
 
-html+="</div>";
+function updateProgress(){
+    let answered=0;
 
-form.innerHTML+=html;
-});
+    questions.forEach((q,idx)=>{
+        if(document.querySelector(`input[name="q${idx}"]:checked`)){
+            answered++;
+        }
+    });
+
+    let percent=Math.round((answered/questions.length)*100);
+
+    let bar=document.getElementById("progressBar");
+    bar.style.width=percent+"%";
+    bar.textContent=percent+"%";
+}
 
 function gradeQuiz(){
 
-let score=0;
-let key="<div class='answerKey'><h2>Answer Key</h2><ol>";
+    let score=0;
 
-questions.forEach((q,i)=>{
+    questions.forEach((q,idx)=>{
 
-const selected=document.querySelector(`input[name="q${i}"]:checked`);
-const box=document.getElementById(`q${i}`);
+        const selected=document.querySelector(`input[name="q${idx}"]:checked`);
+        const feedback=document.getElementById(`fb${idx}`);
 
-box.classList.remove("correct","incorrect");
+        let correctIndex=q.shuffled.findIndex(x=>x.isCorrect);
 
-if(selected && selected.value===q.c){
-score++;
-box.classList.add("correct");
-}else{
-box.classList.add("incorrect");
+        if(selected){
+
+            if(parseInt(selected.value)===correctIndex){
+                score++;
+                feedback.textContent="✓ Correct";
+                feedback.style.color="green";
+                selected.closest(".option").classList.add("correct");
+            }else{
+                feedback.textContent="✗ Incorrect";
+                feedback.style.color="red";
+                selected.closest(".option").classList.add("incorrect");
+
+                const radios=document.getElementsByName(`q${idx}`);
+                radios[correctIndex].closest(".option").classList.add("correct");
+            }
+
+        }else{
+            feedback.textContent="No answer selected";
+            feedback.style.color="orange";
+
+            const radios=document.getElementsByName(`q${idx}`);
+            radios[correctIndex].closest(".option").classList.add("correct");
+        }
+
+    });
+
+    let percent=((score/questions.length)*100).toFixed(1);
+
+    document.getElementById("results").innerHTML=
+        `Score: ${score} / ${questions.length}<br>
+         Percentage: ${percent}%`;
+
+    window.scrollTo({top:document.body.scrollHeight,behavior:"smooth"});
 }
 
-key+=`<li>${q.c}</li>`;
-});
+let timeLeft=1800;
 
-key+="</ol></div>";
+const timer=setInterval(()=>{
 
-document.getElementById("results").innerHTML=
-`<h2>Final Score: ${score}/20 (${Math.round(score/20*100)}%)</h2>` + key;
+    let minutes=Math.floor(timeLeft/60);
+    let seconds=timeLeft%60;
 
-window.scrollTo(0,document.body.scrollHeight);
-}
+    document.getElementById("timer").innerHTML=
+        `Time: ${String(minutes).padStart(2,"0")}:${String(seconds).padStart(2,"0")}`;
+
+    timeLeft--;
+
+    if(timeLeft<0){
+        clearInterval(timer);
+        alert("Time is up! Your quiz will be submitted automatically.");
+        gradeQuiz();
+    }
+
+},1000);
 
 </script>
 
