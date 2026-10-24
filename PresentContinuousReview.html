@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<body style="background-image: url('ClearBlueSky.jpg');">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Present Continuous Quiz (A1-A2)</title>
+
+<style>
+body{
+    font-family: Arial, sans-serif;
+    background:#f4f6f9;
+    margin:0;
+    padding:20px;
+}
+
+.container{
+    max-width:900px;
+    margin:auto;
+    background:white;
+    padding:25px;
+    border-radius:10px;
+    box-shadow:0 2px 8px rgba(0,0,0,0.15);
+}
+
+h1{
+    text-align:center;
+    color:#2c3e50;
+}
+
+.progress-container{
+    width:100%;
+    background:#ddd;
+    border-radius:20px;
+    margin:20px 0;
+}
+
+.progress-bar{
+    height:20px;
+    width:0%;
+    background:#3498db;
+    border-radius:20px;
+    transition:0.3s;
+}
+
+.question{
+    margin-bottom:25px;
+    padding:15px;
+    border:1px solid #ddd;
+    border-radius:8px;
+}
+
+.question h3{
+    margin-top:0;
+}
+
+.option{
+    display:block;
+    margin:8px 0;
+}
+
+button{
+    display:block;
+    margin:25px auto;
+    padding:12px 24px;
+    font-size:16px;
+    background:#3498db;
+    color:white;
+    border:none;
+    border-radius:6px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#2980b9;
+}
+
+.correct{
+    background:#d4edda;
+    border:1px solid #28a745;
+}
+
+.incorrect{
+    background:#f8d7da;
+    border:1px solid #dc3545;
+}
+
+#results{
+    text-align:center;
+    font-size:22px;
+    font-weight:bold;
+    margin-top:20px;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<h1>Present Continuous Review (for Section 6557)</h1>
+
+<div class="progress-container">
+<div id="progressBar" class="progress-bar"></div>
+</div>
+
+<form id="quizForm"></form>
+
+<button onclick="gradeQuiz()" type="button">Submit Quiz</button>
+
+<div id="results"></div>
+
+</div>
+
+<script>
+
+const questions = [
+
+{
+question:"Which sentence is in the present continuous?",
+options:[
+{text:"I play football every day.",correct:false},
+{text:"I am playing football now.",correct:true},
+{text:"I played football yesterday.",correct:false},
+{text:"I will play football tomorrow.",correct:false}
+]
+},
+
+{
+question:"She _____ a book right now.",
+options:[
+{text:"reads",correct:false},
+{text:"is reading",correct:true},
+{text:"read",correct:false},
+{text:"reading",correct:false}
+]
+},
+
+{
+question:"We use the present continuous for actions _____.",
+options:[
+{text:"in the past",correct:false},
+{text:"happening now",correct:true},
+{text:"always true",correct:false},
+{text:"finished yesterday",correct:false}
+]
+},
+
+{
+question:"They are _____ dinner.",
+options:[
+{text:"cook",correct:false},
+{text:"cooks",correct:false},
+{text:"cooking",correct:true},
+{text:"cooked",correct:false}
+]
+},
+
+{
+question:"Which word often goes with the present continuous?",
+options:[
+{text:"yesterday",correct:false},
+{text:"last year",correct:false},
+{text:"now",correct:true},
+{text:"usually",correct:false}
+]
+},
+
+{
+question:"The weather is _____ warmer.",
+options:[
+{text:"become",correct:false},
+{text:"became",correct:false},
+{text:"becoming",correct:true},
+{text:"becomes",correct:false}
+]
+},
+
+{
+question:"I _____ my homework this week.",
+options:[
+{text:"am doing",correct:true},
+{text:"do",correct:false},
+{text:"did",correct:false},
+{text:"does",correct:false}
+]
+},
+
+{
+question:"Which sentence is correct?",
+options:[
+{text:"I am knowing the answer.",correct:false},
+{text:"I know the answer.",correct:true},
+{text:"I knowing the answer.",correct:false},
+{text:"I am know the answer.",correct:false}
+]
+},
+
+{
+question:"He is _____ to music.",
+options:[
+{text:"listen",correct:false},
+{text:"listening",correct:true},
+{text:"listens",correct:false},
+{text:"listened",correct:false}
+]
+},
+
+{
+question:"Which verb is usually NOT used in the present continuous?",
+options:[
+{text:"grow",correct:false},
+{text:"study",correct:false},
+{text:"want",correct:true},
+{text:"change",correct:false}
+]
+},
+
+{
+question:"My English is _____ better.",
+options:[
+{text:"become",correct:false},
+{text:"becomes",correct:false},
+{text:"becoming",correct:true},
+{text:"became",correct:false}
+]
+},
+
+{
+question:"Look! The children are _____.",
+options:[
+{text:"run",correct:false},
+{text:"runs",correct:false},
+{text:"running",correct:true},
+{text:"ran",correct:false}
+]
+}
+
+];
+
+function shuffle(array){
+    for(let i=array.length-1;i>0;i--){
+        const j=Math.floor(Math.random()*(i+1));
+        [array[i],array[j]]=[array[j],array[i]];
+    }
+}
+
+const form=document.getElementById("quizForm");
+
+function buildQuiz(){
+
+    questions.forEach((q,index)=>{
+
+        shuffle(q.options);
+
+        const div=document.createElement("div");
+        div.className="question";
+
+        let html=`<h3>${index+1}. ${q.question}</h3>`;
+
+        q.options.forEach((option,optIndex)=>{
+
+            const letter=["A","B","C","D"][optIndex];
+
+            html+=`
+            <label class="option">
+                <input type="radio" name="q${index}">
+                ${letter}. ${option.text}
+            </label>
+            `;
+        });
+
+        div.innerHTML=html;
+        form.appendChild(div);
+    });
+
+    attachProgressTracking();
+}
+
+function attachProgressTracking(){
+
+    document.querySelectorAll("input[type='radio']").forEach(radio=>{
+
+        radio.addEventListener("change",()=>{
+
+            let answered=0;
+
+            questions.forEach((q,index)=>{
+                if(document.querySelector(`input[name='q${index}']:checked`)){
+                    answered++;
+                }
+            });
+
+            let percent=(answered/questions.length)*100;
+            document.getElementById("progressBar").style.width=percent+"%";
+        });
+
+    });
+
+}
+
+function gradeQuiz(){
+
+    let score=0;
+
+    document.querySelectorAll(".question").forEach((div,index)=>{
+
+        const selected=document.querySelector(`input[name='q${index}']:checked`);
+
+        div.classList.remove("correct","incorrect");
+
+        if(selected){
+
+            const labels=div.querySelectorAll(".option");
+
+            labels.forEach((label,optionIndex)=>{
+
+                if(label.contains(selected)){
+
+                    if(questions[index].options[optionIndex].correct){
+                        score++;
+                        div.classList.add("correct");
+                    }else{
+                        div.classList.add("incorrect");
+                    }
+
+                }
+
+            });
+
+        }else{
+            div.classList.add("incorrect");
+        }
+
+    });
+
+    const percentage=Math.round((score/questions.length)*100);
+
+    let message="";
+
+    if(percentage>=80){
+        message="Excellent!";
+    }else if(percentage>=60){
+        message="Good job!";
+    }else{
+        message="Keep practicing!";
+    }
+
+    document.getElementById("results").innerHTML=
+    `Score: ${score}/${questions.length} (${percentage}%)<br>${message}`;
+}
+
+buildQuiz();
+
+</script>
+
+</body>
+</html>
