@@ -1,1 +1,60 @@
-<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Chapter 5 Quiz V2</title><style>body{font-family:Segoe UI,sans-serif;margin:0;background:#f4f8fc}.header{background:linear-gradient(135deg,#1f4e79,#3b82f6);color:#fff;padding:20px;position:sticky;top:0}.wrap{max-width:1100px;margin:auto;padding:20px}.card{background:#fff;padding:16px;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,.08);margin:12px 0}.nav{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}.nav button{padding:8px}.progress{height:12px;background:#dbeafe;border-radius:10px}.bar{height:12px;background:#22c55e;width:0%;border-radius:10px}.correct{background:#dcfce7}.incorrect{background:#fee2e2}#results{display:none}</style></head><body><div class="header"><h1>Chapter 5 Sampling Distributions Quiz (Version 2)</h1><div>Name: <input id=name></div><p id=count>Answered 0 of 25</p><div class=progress><div class=bar id=bar></div></div></div><div class=wrap><div class=card><button onclick="openFormulaModal()">Formula Reference</button></div><div class=nav id=nav></div><div id=quiz></div><div class=card><button onclick=gradeQuiz()>Submit Quiz</button> <button onclick=location.reload()>Restart</button> <button onclick=window.print()>Print Results</button></div><div id=results class=card></div></div><script>const q=[['Population mean 80, sd 20, n=25. Standard error?',['0.80','4.00','5.00','16.00'],'B'],['Population mean 50 sd 12 n=36. Variance of X̄?',['2','4','12','24'],'B'],['μ=100 σ=15 n=25. P(X̄>104)?',['0.0918','0.1821','0.4082','0.8179'],'A'],['μ=70 σ=18 n=36. P(X̄<73)?',['0.8413','0.7580','0.6915','0.9332'],'A'],['μ=40 σ=10 n=100. P(39<X̄<42)?',['0.8186','0.4772','0.3413','0.6827'],'A'],['μ=120 σ=24 n=64. X̄ for z=1.50?',['121.5','122.5','124.5','126.0'],'C'],['CLT: μ=200 σ=40 n=100 SE?',['2','4','10','20'],'B'],['μ=75 σ=30 n=64. P(X̄>80)?',['0.0918','0.1821','0.5000','0.8179'],'A'],['μ=500 σ=90 n=36. z for X̄=515?',['0.50','1.00','1.25','1.50'],'B'],['μ=45 σ=12 n=144. P(X̄<46)?',['0.5000','0.6827','0.8413','0.9772'],'C'],['E(X̄1-X̄2)?',['4','5','6','8'],'C'],['Var(X̄1-X̄2)?',['4','6','8','12'],'C'],['SD(X̄1-X̄2)?',['2.000','2.449','2.828','3.464'],'C'],['P(X̄1-X̄2>3)?',['0.6915','0.7580','0.8413','0.9332'],'B'],['P(X̄1-X̄2<2)?',['0.1587','0.1932','0.8068','0.8413'],'B'],['E(p̂)?',['0.30','0.21','0.70','0.03'],'A'],['Var(p̂)?',['0.0021','0.0210','0.2100','0.0300'],'A'],['SE(p̂)?',['0.0210','0.0458','0.1450','0.2100'],'B'],['P(p̂>0.50)?',['0.0206','0.0418','0.5000','0.9582'],'A'],['P(p̂<0.55)?',['0.1060','0.1879','0.2500','0.8940'],'B'],['E(p̂1-p̂2)?',['0.10','0.15','0.25','0.65'],'B'],['Var(p̂1-p̂2)?',['0.003375','0.03375','0.3375','0.001688'],'A'],['SE?',['0.0411','0.0581','0.1837','0.3375'],'B'],['P(p̂1-p̂2>0.10)?',['0.5000','0.3413','0.1587','0.8413'],'A'],['P(0.05<p̂1-p̂2<0.15)?',['0.2586','0.5000','0.5172','0.7414'],'C']];const L=['A','B','C','D'];let h='';q.forEach((x,i)=>{document.getElementById('nav').innerHTML+=`<button onclick="document.getElementById('q${i}').scrollIntoView()">${i+1}</button>`;h+=`<div class=card id=q${i}><h3>${i+1}. ${x[0]}</h3>`;x[1].forEach((o,j)=>h+=`<label><input onchange=upd() type=radio name=q${i} value=${L[j]}> ${L[j]}. ${o}</label><br>`);h+='</div>';});quiz.innerHTML=h;function upd(){let a=document.querySelectorAll('input[type=radio]:checked').length;count.innerText=`Answered ${a} of 25`;bar.style.width=(a/25*100)+'%';}function gradeQuiz(){let s=0;let review='';q.forEach((x,i)=>{let c=document.querySelector('input[name=q'+i+']:checked');let ans=c?c.value:'None';if(ans===x[2])s++;review+=`<div class='${ans===x[2]?'correct':'incorrect'} card'><b>Q${i+1}</b> Your Answer: ${ans} | Correct: ${x[2]}</div>`});let p=(s/25*100).toFixed(1);let rating=p>=90?'Excellent':p>=80?'Very Good':p>=70?'Good':p>=60?'Satisfactory':'Needs Improvement';results.style.display='block';results.innerHTML=`<h2>${name.value||'Student'}</h2><h3>Score ${s}/25 (${p}%)</h3><h3>${p>=60?'PASS':'FAIL'} - ${rating}</h3><p>${new Date().toLocaleString()}</p>`+review;window.scrollTo(0,document.body.scrollHeight);}</script></body></html>
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Chapter 5 Quiz V2</title><style>body{font-family:Segoe UI,sans-serif;margin:0;background:#f4f8fc}.header{background:linear-gradient(135deg,#1f4e79,#3b82f6);color:#fff;padding:20px;position:sticky;top:0}.wrap{max-width:1100px;margin:auto;padding:20px}.card{background:#fff;padding:16px;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,.08);margin:12px 0}.nav{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}.nav button{padding:8px}.progress{height:12px;background:#dbeafe;border-radius:10px}.bar{height:12px;background:#22c55e;width:0%;border-radius:10px}.correct{background:#dcfce7}.incorrect{background:#fee2e2}#results{display:none}</style></head><body><div class="header"><h1>Chapter 5 Sampling Distributions Quiz (Version 2)</h1><div>Name: <input id=name></div><p id=count>Answered 0 of 25</p><div class=progress><div class=bar id=bar></div></div></div><div class=wrap><div class=card><button onclick="openFormulaModal()">Formula Reference</button></div><div class=nav id=nav></div><div id=quiz></div><div class=card><button onclick=gradeQuiz()>Submit Quiz</button> <button onclick=location.reload()>Restart</button> <button onclick=window.print()>Print Results</button></div><div id=results class=card></div></div><script>const q=[['Population mean 80, sd 20, n=25. Standard error?',['0.80','4.00','5.00','16.00'],'B'],['Population mean 50 sd 12 n=36. Variance of X̄?',['2','4','12','24'],'B'],['μ=100 σ=15 n=25. P(X̄>104)?',['0.0918','0.1821','0.4082','0.8179'],'A'],['μ=70 σ=18 n=36. P(X̄<73)?',['0.8413','0.7580','0.6915','0.9332'],'A'],['μ=40 σ=10 n=100. P(39<X̄<42)?',['0.8186','0.4772','0.3413','0.6827'],'A'],['μ=120 σ=24 n=64. X̄ for z=1.50?',['121.5','122.5','124.5','126.0'],'C'],['CLT: μ=200 σ=40 n=100 SE?',['2','4','10','20'],'B'],['μ=75 σ=30 n=64. P(X̄>80)?',['0.0918','0.1821','0.5000','0.8179'],'A'],['μ=500 σ=90 n=36. z for X̄=515?',['0.50','1.00','1.25','1.50'],'B'],['μ=45 σ=12 n=144. P(X̄<46)?',['0.5000','0.6827','0.8413','0.9772'],'C'],['E(X̄1-X̄2)?',['4','5','6','8'],'C'],['Var(X̄1-X̄2)?',['4','6','8','12'],'C'],['SD(X̄1-X̄2)?',['2.000','2.449','2.828','3.464'],'C'],['P(X̄1-X̄2>3)?',['0.6915','0.7580','0.8413','0.9332'],'B'],['P(X̄1-X̄2<2)?',['0.1587','0.1932','0.8068','0.8413'],'B'],['E(p̂)?',['0.30','0.21','0.70','0.03'],'A'],['Var(p̂)?',['0.0021','0.0210','0.2100','0.0300'],'A'],['SE(p̂)?',['0.0210','0.0458','0.1450','0.2100'],'B'],['P(p̂>0.50)?',['0.0206','0.0418','0.5000','0.9582'],'A'],['P(p̂<0.55)?',['0.1060','0.1879','0.2500','0.8940'],'B'],['E(p̂1-p̂2)?',['0.10','0.15','0.25','0.65'],'B'],['Var(p̂1-p̂2)?',['0.003375','0.03375','0.3375','0.001688'],'A'],['SE?',['0.0411','0.0581','0.1837','0.3375'],'B'],['P(p̂1-p̂2>0.10)?',['0.5000','0.3413','0.1587','0.8413'],'A'],['P(0.05<p̂1-p̂2<0.15)?',['0.2586','0.5000','0.5172','0.7414'],'C']];const L=['A','B','C','D'];let h='';q.forEach((x,i)=>{document.getElementById('nav').innerHTML+=`<button onclick="document.getElementById('q${i}').scrollIntoView()">${i+1}</button>`;h+=`<div class=card id=q${i}><h3>${i+1}. ${x[0]}</h3>`;x[1].forEach((o,j)=>h+=`<label><input onchange=upd() type=radio name=q${i} value=${L[j]}> ${L[j]}. ${o}</label><br>`);h+='</div>';});quiz.innerHTML=h;function upd(){let a=document.querySelectorAll('input[type=radio]:checked').length;count.innerText=`Answered ${a} of 25`;bar.style.width=(a/25*100)+'%';}function gradeQuiz(){let s=0;let review='';q.forEach((x,i)=>{let c=document.querySelector('input[name=q'+i+']:checked');let ans=c?c.value:'None';if(ans===x[2])s++;review+=`<div class='${ans===x[2]?'correct':'incorrect'} card'><b>Q${i+1}</b> Your Answer: ${ans} | Correct: ${x[2]}</div>`});let p=(s/25*100).toFixed(1);let rating=p>=90?'Excellent':p>=80?'Very Good':p>=70?'Good':p>=60?'Satisfactory':'Needs Improvement';results.style.display='block';results.innerHTML=`<h2>${name.value||'Student'}</h2><h3>Score ${s}/25 (${p}%)</h3><h3>${p>=60?'PASS':'FAIL'} - ${rating}</h3><p>${new Date().toLocaleString()}</p>`+review;window.scrollTo(0,document.body.scrollHeight);}
+function openFormulaModal(){
+    document.getElementById("formulaModal").style.display = "block";
+}
+
+function closeFormulaModal(){
+    document.getElementById("formulaModal").style.display = "none";
+}
+
+window.onclick = function(event){
+    const modal = document.getElementById("formulaModal");
+
+    if(event.target === modal){
+        modal.style.display = "none";
+    }
+}
+.modal{
+    display:none;
+    position:fixed;
+    z-index:1000;
+    left:0;
+    top:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.6);
+}
+
+.modal-content{
+    background:white;
+    max-width:700px;
+    margin:8% auto;
+    padding:25px;
+    border-radius:12px;
+}
+
+.close-btn{
+    float:right;
+    font-size:30px;
+    cursor:pointer;
+}
+
+</script><div id="formulaModal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeFormulaModal()">&times;</span>
+
+        <h2>Chapter 5 Formula Reference</h2>
+
+        <h3>Sampling Distribution of the Mean</h3>
+        <p>SE(x̄) = σ / √n</p>
+
+        <h3>Sampling Distribution of a Proportion</h3>
+        <p>SE(p̂) = √[p(1-p)/n]</p>
+
+        <h3>Difference Between Two Means</h3>
+        <p>SE = √[(σ₁²/n₁) + (σ₂²/n₂)]</p>
+
+        <h3>Difference Between Two Proportions</h3>
+        <p>SE = √[(p₁(1-p₁)/n₁) + (p₂(1-p₂)/n₂)]</p>
+    </div>
+</div></body></html>
